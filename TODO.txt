@@ -1,8 +1,0 @@
-Faire la vue matos en prêt: Fini mais moche
-
-Rajouter l'option rendre:
-    => Change API to add remove item...
-    => Test à faire plus Interface.
-
-
-Prendre en compte que le matos est rendu dans la présentation des sorties.
