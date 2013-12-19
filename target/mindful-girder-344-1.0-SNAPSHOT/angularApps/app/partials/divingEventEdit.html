@@ -1,0 +1,82 @@
+<ul>
+    <li ng-repeat="rent in dEvent.rentalRecords" class="repeat-item">
+        {{rent.renter.firstName}} {{rent.renter.lastName}} ({{rent.price}}€)
+
+        <span ng-hide="rent.paid">
+            <select id="payment" style="width:285px;display:inline;" class="form-control" placeholder="Sélectionner un mode de paiement"
+                    ng-change="paid(payment,rent.id)" ng-model="payment" ng-options="it.label as it.label for it in payments" class="form-control">
+                <option value="">Sélectionner un mode de paiement</option>
+            </select>
+        </span>
+        <span ng-hide="!rent.paid">
+            Payé en {{rent.payment}}
+        </span>
+        <button type="button" class="btn btn-primary btn-sm" ng-click="edit(rent.id)">Edit</button>
+        <button type="button" class="btn btn-danger btn-sm" ng-click="remove(rent.id)">Delete</button>
+
+        <ul>
+            <li ng-repeat="equip in rent.equipments">
+                {{equip.type}}: {{equip.reference}}  ({{equip.price}}€)
+            </li>
+        </ul>
+
+    </li>
+</ul>
+
+<div class="create-from">
+    <form role="form">
+        <div class="form-group">
+            <label for="renter">Loueur</label>
+            <select id="renter" class="form-control" placeholder="Sélectionner un loueur"
+                    ng-model="newItem.renter.id" ng-options="it.id as it.firstName + ' ' + it.lastName for it in adherents | notInRental:dEvent.rentalRecords:newItem" class="form-control">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tank">Bloc</label>
+            <select id="tank" class="form-control" placeholder="Sélectionner un bloc"
+                    ng-model="tank.reference" ng-options="it.reference as it.reference + ' (' + it.blockCapacity + ')' for it in tanks| itemNotRented:tank" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="jacket">Stab</label>
+            <select id="jacket" class="form-control" placeholder="Sélectionner une stab"
+                    ng-model="jacket.reference" ng-options="it.reference as it.reference for it in jackets | itemNotRented:jacket" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="regulator">Détendeur</label>
+            <select id="regulator" class="form-control" placeholder="Sélectionner un détendeur"
+                    ng-model="regulator.reference" ng-options="it.reference as it.reference for it in regulators | itemNotRented:regulator" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="overalls">Salopette</label>
+            <select id="overalls" class="form-control" placeholder="Sélectionner une salopette"
+                    ng-model="overalls.reference" ng-options="it.reference as it.reference for it in suits | isSuitPart:'overalls' | itemNotRented:overalls" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="overalls">Surveste</label>
+            <select id="coat" class="form-control" placeholder="Sélectionner une surveste"
+                    ng-model="coat.reference" ng-options="it.reference as it.reference for it in suits | isSuitPart:'coat' | itemNotRented:coat" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="overalls">Intégrale</label>
+            <select id="full" class="form-control" placeholder="Sélectionner une intégrale"
+                    ng-model="full.reference" ng-options="it.reference as it.reference for it in suits | isSuitPart:'full'| itemNotRented:full" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary" ng-click="addRentalRecord()" >{{createButtonCaption}}</button>
+            <button type="button" class="btn btn-primary" ng-click="reload()">Annuler</button>
+        </div>
+    </form>
+</div>
+
