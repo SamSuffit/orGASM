@@ -56,6 +56,14 @@ public class RentHistory {
         this.turnInDate = turnInDate;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     //----- Used for objectify
 
     private RentHistory() {

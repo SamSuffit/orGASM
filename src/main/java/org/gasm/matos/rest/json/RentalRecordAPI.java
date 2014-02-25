@@ -4,6 +4,7 @@ import com.googlecode.objectify.VoidWork;
 import org.apache.commons.lang3.StringUtils;
 import org.gasm.matos.dao.*;
 import org.gasm.matos.entity.*;
+import org.gasm.matos.entity.exception.IllegalRentStatusException;
 import org.gasm.matos.entity.rental.DivingEvent;
 import org.gasm.matos.entity.rental.RentalRecord;
 import org.gasm.matos.entity.rental.entity.Payment;
@@ -66,7 +67,7 @@ public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
             , @QueryParam("renterId") final Long  renterId
             , @QueryParam("equipmentId") final String equipmentId
 
-    ) throws ItemNotFoundException {
+    ) throws ItemNotFoundException, IllegalRentStatusException {
 
         if(renterId == null) {
             throw new ItemNotFoundException("No renterId specified");
@@ -95,7 +96,7 @@ public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
         return dEvent;
     }
 
-    private void saveRentalRecord(final RentalRecord record, final DivingEvent dEvent) throws ItemNotFoundException {
+    private void saveRentalRecord(final RentalRecord record, final DivingEvent dEvent) throws ItemNotFoundException, IllegalRentStatusException {
         ofy().transact(new VoidWork() {
             @Override
             public void vrun() {

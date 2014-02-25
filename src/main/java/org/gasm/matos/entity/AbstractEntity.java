@@ -15,6 +15,7 @@ public abstract class AbstractEntity {
     @JsonIgnore
     public abstract AbstractDao getDao();
 
+    @SuppressWarnings("unchecked")
     public void save() {
         getDao().createOrUpdate(this);
     }

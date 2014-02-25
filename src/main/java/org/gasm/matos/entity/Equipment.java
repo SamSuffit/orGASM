@@ -9,6 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.gasm.matos.dao.RentHistoryDao;
 import org.gasm.matos.entity.enums.Brand;
+import org.gasm.matos.entity.exception.IllegalRentStatusException;
 import org.gasm.matos.entity.helper.ObjectifyHelper;
 import org.gasm.matos.entity.rental.RentalRecord;
 import org.gasm.matos.entity.visitor.EquipmentVisitor;
@@ -34,8 +35,9 @@ public abstract class Equipment extends AbstractEntity {
     private Ref<RentalRecord> rentalRecord;
 
     private List<Ref<RentHistory>> historyList;
+    private final RentHistoryDao rentHistoryDao = new RentHistoryDao();
 
-	public abstract String getType();
+    public abstract String getType();
 
 	public String getReference() {
 		return reference;
@@ -57,14 +59,14 @@ public abstract class Equipment extends AbstractEntity {
         return ObjectifyHelper.getItem(this.rentalRecord);
     }
 
-    public void rent(RentalRecord rentalRecord) {
+    public void rent(RentalRecord rentalRecord) throws IllegalRentStatusException {
 
         if(getRentalRecord() != null && ObjectUtils.equals(getRentalRecord().getId(),rentalRecord.getId()))  {
             //On est en modification de location et sur la sur la même location on ne fait rien
         }
         else if (getRentalRecord() != null && !ObjectUtils.equals(getRentalRecord().getId(),rentalRecord.getId())) {
             //On change de rental Record et on n'a pas été rendu....
-            throw new IllegalStateException("Equipemnt reference[" + reference + "]Turn me In before rent me again !!!!!");
+            throw new IllegalRentStatusException("Equipemnt reference[" + reference + "]Turn me In before rent me again !!!!!");
         }
         else {
             this.rentalRecord = ObjectifyHelper.getRef(rentalRecord);
@@ -89,12 +91,32 @@ public abstract class Equipment extends AbstractEntity {
 
             RentHistory rentHistory = ObjectifyHelper.getItem(historyList.get(index));
             rentHistory.setTurnInDate(new Date());
-            RentHistoryDao rentHistoryDao = new RentHistoryDao();
             rentHistoryDao.createOrUpdate(rentHistory);
 
-            historyList.add(index,ObjectifyHelper.getRef(rentHistory));
         }
         this.rentalRecord = null;
+    }
+
+    public void cancelRent() throws IllegalRentStatusException {
+
+        if(historyList == null || historyList.size() == 0) {
+            System.err.println("Pas d'historique !!!!");
+            /*throw new IllegalStateException("Pas d'historique !!!! on ne peut pas rendre");*/
+        }
+        else {
+            int index = historyList.size() - 1;
+
+            RentHistory rentHistory = ObjectifyHelper.getItem(historyList.get(index));
+            if(rentHistory.getTurnInDate() != null) {
+                throw new IllegalRentStatusException("Equipemnt reference[" + reference + "] - no open rent History !!!!!");
+            }
+
+            rentHistoryDao.delete(rentHistory.getId());
+
+            historyList.remove(index);
+        }
+        this.rentalRecord = null;
+
     }
 
     public boolean isRented() {
@@ -117,4 +139,5 @@ public abstract class Equipment extends AbstractEntity {
     public List<RentHistory> getHistoryList() {
         return ObjectifyHelper.toList(historyList);
     }
+
 }

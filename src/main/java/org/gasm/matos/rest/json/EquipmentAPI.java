@@ -4,6 +4,7 @@ import org.gasm.matos.dao.EquipmentDao;
 import org.gasm.matos.dao.JacketDao;
 import org.gasm.matos.entity.Equipment;
 import org.gasm.matos.entity.Jacket;
+import org.gasm.matos.entity.exception.IllegalRentStatusException;
 import org.gasm.persistance.dao.AbstractStringIdDao;
 
 import javax.ws.rs.*;
@@ -40,7 +41,7 @@ public class EquipmentAPI {
     @PUT
     @Path("{id}/cancelRent")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public void cancelRent(@PathParam("id") String id) {
+    public void cancelRent(@PathParam("id") String id) throws IllegalRentStatusException {
         Equipment equipment = dao.get(id);
         equipment.cancelRent();
         dao.createOrUpdate(equipment);
