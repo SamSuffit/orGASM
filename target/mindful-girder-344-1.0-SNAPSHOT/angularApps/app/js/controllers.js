@@ -122,17 +122,30 @@ angular.module('myApp.controllers', [])
                     });
             };
 
+            $scope.addEquipment = function (equipmentId) {
+                alert('toto: ' +equipmentId);
+            };
             $scope.addRentalRecord = function() {
-                $scope.newItem.$addToDivingEvent( {'dEventId':$scope.dEventId
-                    ,'jacketId': ($scope.jacket != null ? $scope.jacket.reference : null)
-                    ,'regulatorId': ($scope.regulator != null ? $scope.regulator.reference : null)
+
+                if ($scope.jacket != null) {
+                     /*
+                    $scope.addEquipment($scope.jacket.reference);
+                    $scope.newItem.$addToDivingEvent( {'dEventId':$scope.dEventId
+                    ,'equipmentId': $scope.jacket.reference },
+                        function() {
+                            $scope.reload();
+                        });
+                      */
+                }
+
+               /*
+                ,'regulatorId': ($scope.regulator != null ? $scope.regulator.reference : null)
                     ,'tankId': ($scope.tank != null ? $scope.tank.reference : null)
                     ,'overallsId': ($scope.overalls != null ? $scope.overalls.reference : null)
                     ,'coatId': ($scope.coat != null ? $scope.coat.reference : null)
                     ,'fullId': ($scope.full != null ? $scope.full.reference : null)
-                }, function() {
-                    $scope.reload();
-                });
+                */
+
             };
 
             $scope.remove = function(id) {

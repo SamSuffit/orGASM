@@ -72,13 +72,27 @@
 <script src="lib/angular-strap/bootstrap-datepicker.js"></script>
 
 
+<script type="text/javascript">
+    var baseUrl= 'http://localhost:8080';
+</script>
+
+
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
 <script src="js/controllers.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
 
+
+<!--
 <script src="https://apis.google.com/js/client.js?onload=googleOnLoadCallback"></script>
+-->
+
+
+<script type="text/javascript">
+    var $injector = angular.bootstrap(document, ['myApp']);
+    console.log('Angular bootstrap complete');
+</script>
 
 
 <!-- Latest compiled and minified JavaScript -->
