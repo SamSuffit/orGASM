@@ -7,7 +7,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.gasm.matos.dao.DivingEventDao;
-import org.gasm.matos.entity.AbstractEntity;
+import org.gasm.matos.entity.AbstractLongEntity;
 import org.gasm.matos.entity.Adherent;
 import org.gasm.matos.entity.helper.ObjectifyHelper;
 import org.gasm.matos.entity.rental.billing.BillingType;
@@ -20,7 +20,7 @@ import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DivingEvent extends AbstractEntity {
+public class DivingEvent extends AbstractLongEntity {
 
     public DivingEvent() {
         billingType = BillingType.Standard;

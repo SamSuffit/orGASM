@@ -1,11 +1,12 @@
 package org.gasm.matos.entity;
 
 import com.googlecode.objectify.Ref;
-import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import org.gasm.matos.dao.RentHistoryDao;
 import org.gasm.matos.entity.helper.ObjectifyHelper;
 import org.gasm.matos.entity.rental.billing.BillingType;
+import org.gasm.persistance.dao.AbstractDao;
 
 import java.util.Date;
 
@@ -17,7 +18,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-public class RentHistory {
+public class RentHistory extends AbstractLongEntity {
 
     @Id
     private Long id;
@@ -67,5 +68,10 @@ public class RentHistory {
     //----- Used for objectify
 
     private RentHistory() {
+    }
+
+    @Override
+    public AbstractDao getDao() {
+        return new RentHistoryDao();
     }
 }

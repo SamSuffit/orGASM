@@ -11,7 +11,11 @@ public class DivingEventAPI extends AbstractLongIdAPI<DivingEvent> {
 	
 	DivingEventDao dao = new DivingEventDao();
 
-	@Override
+    public DivingEventAPI() {
+        super();
+    }
+
+    @Override
 	public AbstractLongIdDao<DivingEvent> getDao() {
 		return dao;
 	}

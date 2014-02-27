@@ -6,7 +6,7 @@ import com.googlecode.objectify.annotation.Id;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.gasm.matos.dao.RentalRecordDao;
-import org.gasm.matos.entity.AbstractEntity;
+import org.gasm.matos.entity.AbstractLongEntity;
 import org.gasm.matos.entity.Adherent;
 import org.gasm.matos.entity.Equipment;
 import org.gasm.matos.entity.helper.ObjectifyHelper;
@@ -15,14 +15,12 @@ import org.gasm.matos.entity.rental.entity.Payment;
 import org.gasm.matos.rest.exception.ItemNotFoundException;
 import org.gasm.persistance.dao.AbstractDao;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RentalRecord extends AbstractEntity {
+public class RentalRecord extends AbstractLongEntity {
 
     @Override
     @JsonIgnore

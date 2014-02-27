@@ -12,6 +12,8 @@ import org.gasm.persistance.dao.AbstractDao;
  */
 public abstract class AbstractEntity {
 
+    public abstract boolean isCreated();
+
     @JsonIgnore
     public abstract AbstractDao getDao();
 

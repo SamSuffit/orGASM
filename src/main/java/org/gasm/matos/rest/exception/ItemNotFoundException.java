@@ -1,7 +1,6 @@
 package org.gasm.matos.rest.exception;
 
 import org.gasm.matos.entity.AbstractEntity;
-import org.gasm.matos.entity.Adherent;
 
 /**
  * Created with IntelliJ IDEA.

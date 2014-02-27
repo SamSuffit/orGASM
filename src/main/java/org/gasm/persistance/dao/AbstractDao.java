@@ -1,16 +1,33 @@
 package org.gasm.persistance.dao;
 
+import org.gasm.matos.entity.AbstractEntity;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-public abstract class AbstractDao<T extends Object> {
-	
-	protected abstract  Class<T> getClazz();
-	
+public abstract class AbstractDao<T extends AbstractEntity> {
+
+    protected ArrayList<T> waitingToBeSave = new ArrayList<T>();
+
+    synchronized ArrayList<T> getWaitingToBeSave() {
+        return waitingToBeSave;
+    }
+
+    synchronized void setWaitingToBeSave(ArrayList<T> tArrayList) {
+         waitingToBeSave = tArrayList;
+    }
+
+    protected abstract Class<T> getClazz();
+
 	public T createOrUpdate(T entity) {
-		ofy().save().entity(entity).now();
-		return entity;
+
+
+            ofy().save().entity(entity).now();
+
+
+        return entity;
 	}
 	
 	public List<T> findAll() {

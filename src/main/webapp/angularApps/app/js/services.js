@@ -84,7 +84,7 @@ angular.module('myApp.services', ['ngResource'])
     .factory('RentalRecord', ['$resource',
         function($resource){
             return $resource('/api/rentalRecord/:itemId/',{itemId:'@id'} , {
-                addToDivingEvent: { method: 'PUT', url: '/api/rentalRecord/addToDivingEvent/:dEventId?jacketId=:jacketId&regulatorId=:regulatorId&tankId=:tankId' }
+                addToDivingEvent: { method: 'PUT', url: '/api/rentalRecord/addToDivingEvent?dEventId=:dEventId&renterId=:renterId&equipmentId=:equipmentId' }
             });
         }])
     .factory('adminHelperService', [function(){

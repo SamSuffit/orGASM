@@ -11,7 +11,11 @@ public class AdherentAPI extends AbstractLongIdAPI<Adherent> {
 	
 	AdherentDao dao = new AdherentDao();
 
-	@Override
+    public AdherentAPI() {
+        super();
+    }
+
+    @Override
 	public AbstractLongIdDao<Adherent> getDao() {
 		return dao;
 	}

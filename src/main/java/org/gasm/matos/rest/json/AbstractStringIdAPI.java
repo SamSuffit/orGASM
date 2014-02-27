@@ -1,12 +1,12 @@
 package org.gasm.matos.rest.json;
 
-import org.gasm.matos.entity.AbstractEntity;
+import org.gasm.matos.entity.AbstractStringEntity;
 import org.gasm.persistance.dao.AbstractStringIdDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-public abstract class AbstractStringIdAPI<T extends AbstractEntity> extends AbstractAPI<T> {
+public abstract class AbstractStringIdAPI<T extends AbstractStringEntity> extends AbstractAPI<T> {
 	
 	public abstract AbstractStringIdDao<T> getDao();
 	

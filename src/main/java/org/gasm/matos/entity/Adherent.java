@@ -14,7 +14,7 @@ import org.gasm.persistance.dao.AbstractDao;
  *
  */
 @Entity
-public class Adherent extends AbstractEntity {
+public class Adherent extends AbstractLongEntity {
 
     @Override
     @JsonIgnore
