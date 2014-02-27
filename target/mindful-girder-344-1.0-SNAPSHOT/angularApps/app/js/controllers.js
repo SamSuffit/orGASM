@@ -103,7 +103,7 @@ angular.module('myApp.controllers', [])
                     $scope.payments = Payment.query();
                     $scope.suits = Suit.query();
 
-                    $scope.newItem = new RentalRecord();
+
                     $scope.createButtonCaption = "Créer";
                     $scope.jacket = null;
                     $scope.tank = null;
@@ -111,6 +111,7 @@ angular.module('myApp.controllers', [])
                     $scope.overalls = null;
                     $scope.coat = null;
                     $scope.full = null;
+                    $scope.renterId = null;
 
                 });
             };
@@ -123,28 +124,41 @@ angular.module('myApp.controllers', [])
             };
 
             $scope.addEquipment = function (equipmentId) {
-                alert('toto: ' +equipmentId);
+                $scope.newItem.$addToDivingEvent( {'dEventId':$scope.dEventId
+                        ,'equipmentId': equipmentId , 'renterId' :  $scope.renterId},
+                    function() {
+                        $scope.waitingCalls--;
+                        console.debug( $scope.waitingCalls);
+                        if( $scope.waitingCalls == 0) {
+                            $scope.reload();
+                        }
+                    });
             };
             $scope.addRentalRecord = function() {
 
+                var equipmentList = new Array();
                 if ($scope.jacket != null) {
-                     /*
-                    $scope.addEquipment($scope.jacket.reference);
-                    $scope.newItem.$addToDivingEvent( {'dEventId':$scope.dEventId
-                    ,'equipmentId': $scope.jacket.reference },
-                        function() {
-                            $scope.reload();
-                        });
-                      */
+                    equipmentList.push($scope.jacket.reference);
                 }
-
-               /*
-                ,'regulatorId': ($scope.regulator != null ? $scope.regulator.reference : null)
-                    ,'tankId': ($scope.tank != null ? $scope.tank.reference : null)
-                    ,'overallsId': ($scope.overalls != null ? $scope.overalls.reference : null)
-                    ,'coatId': ($scope.coat != null ? $scope.coat.reference : null)
-                    ,'fullId': ($scope.full != null ? $scope.full.reference : null)
-                */
+                if ($scope.regulator != null) {
+                    equipmentList.push($scope.regulator.reference);
+                }
+                if ($scope.tank != null) {
+                    equipmentList.push($scope.tank.reference);
+                }
+                if ($scope.overalls != null) {
+                    equipmentList.push($scope.overalls.reference);
+                }
+                if ($scope.coat != null) {
+                    equipmentList.push($scope.coat.reference);
+                }
+                if ($scope.full != null) {
+                    equipmentList.push($scope.full.reference);
+                }
+                $scope.waitingCalls =  equipmentList.length;
+                equipmentList.forEach(function (element,index) {
+                    $scope.addEquipment(element);
+                })  ;
 
             };
 

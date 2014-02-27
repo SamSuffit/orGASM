@@ -28,7 +28,7 @@
         <div class="form-group">
             <label for="renter">Loueur</label>
             <select id="renter" class="form-control" placeholder="Sélectionner un loueur"
-                    ng-model="newItem.renter.id" ng-options="it.id as it.firstName + ' ' + it.lastName for it in adherents | notInRental:dEvent.rentalRecords:newItem" class="form-control">
+                    ng-model="renterId" ng-options="it.id as it.firstName + ' ' + it.lastName for it in adherents | notInRental:dEvent.rentalRecords:newItem" class="form-control">
             </select>
         </div>
         <div class="form-group">

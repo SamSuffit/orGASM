@@ -46,8 +46,7 @@ angular.module('myApp', [
   ,'$strap.directives'
 
 ])
-.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
-
+.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'homeCtrl'});
   $routeProvider.when('/rentedEquipment', {templateUrl: 'partials/rentedEquipment.html', controller: 'rentedEquipmentCtrl'});
   $routeProvider.when('/stab', {templateUrl: 'partials/stabList.html', controller: 'stabListCtrl'});
