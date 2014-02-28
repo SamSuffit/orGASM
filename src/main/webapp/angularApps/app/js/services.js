@@ -33,7 +33,8 @@ angular.module('myApp.services', ['ngResource'])
         }])
     .factory('Equipment', ['$resource',
         function($resource){
-            return $resource('/api/equipment/:itemId/',{itemId:'@id'} , {
+            return $resource('/api/equipment/:itemId/',{itemId:'@reference'} , {
+                turnIn : {method: 'PUT', url: '/api/equipment/:itemId/turnIn/' },
                 findAllRented: { method: 'GET', isArray:true, url: '/api/equipment/findAllRented/' }
             });
         }])

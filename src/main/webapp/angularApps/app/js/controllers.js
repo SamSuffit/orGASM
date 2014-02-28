@@ -14,10 +14,11 @@ angular.module('myApp.controllers', [])
         $scope.$parent.titleSmall = '';
         $scope.equipments = Equipment.findAllRented();
 
-        $scope.turnIn = function(equipId){
-            console.debug('Cool ' + equipId);
+        $scope.turnIn = function(item){
+            item.$turnIn({},function() {
+                $scope.equipments = Equipment.findAllRented();
+            });
         }
-
     }])
     .controller('stabListCtrl', ['$scope' ,'Jacket', 'adminHelperService' ,
         'Brand', 'Size',
