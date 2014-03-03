@@ -43,7 +43,6 @@ function HttpServer(handlers) {
 HttpServer.prototype.start = function(port) {
   this.port = port;
   this.server.listen(port);
-  util.puts('Http Server running at http://localhost:' + port + '/');
 };
 
 HttpServer.prototype.parseUrl_ = function(urlString) {
@@ -263,6 +262,7 @@ var app = connect()
     })
     .use(connect.static(staticDir))
     .listen(4242);
+util.puts('Http Server running at http://localhost:' + 4242 + '/');
 
 // Must be last,
 main(process.argv);
