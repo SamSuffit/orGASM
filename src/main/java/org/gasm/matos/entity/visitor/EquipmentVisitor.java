@@ -1,6 +1,9 @@
 package org.gasm.matos.entity.visitor;
 
-import org.gasm.matos.entity.*;
+import org.gasm.matos.entity.Jacket;
+import org.gasm.matos.entity.Regulator;
+import org.gasm.matos.entity.Suit;
+import org.gasm.matos.entity.Tank;
 
 /**
  * Created with IntelliJ IDEA.

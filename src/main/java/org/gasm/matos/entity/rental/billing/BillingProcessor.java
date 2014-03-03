@@ -1,9 +1,10 @@
 package org.gasm.matos.entity.rental.billing;
 
-import org.gasm.matos.entity.*;
-import org.gasm.matos.entity.visitor.EquipmentVisitor;
+import org.gasm.matos.entity.Equipment;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,15 +1,12 @@
 package org.gasm.matos.dao;
 
 import org.gasm.matos.entity.Equipment;
-import org.gasm.matos.entity.Jacket;
 import org.gasm.persistance.dao.AbstractStringIdDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static com.googlecode.objectify.ObjectifyService.ofy;
 
 public class EquipmentDao extends AbstractStringIdDao<Equipment> {
 	

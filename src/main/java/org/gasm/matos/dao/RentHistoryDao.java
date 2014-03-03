@@ -1,6 +1,5 @@
 package org.gasm.matos.dao;
 
-import org.gasm.matos.entity.Adherent;
 import org.gasm.matos.entity.RentHistory;
 import org.gasm.persistance.dao.AbstractLongIdDao;
 

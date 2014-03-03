@@ -1,15 +1,15 @@
 package org.gasm.matos.rest.json;
 
-import org.gasm.matos.entity.AbstractEntity;
+import org.gasm.matos.entity.AbstractLongEntity;
 import org.gasm.persistance.dao.AbstractLongIdDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-public abstract class AbstractLongIdAPI<T extends AbstractEntity> extends AbstractAPI<T> {
-	
-	public abstract AbstractLongIdDao<T> getDao();
-	
+public abstract class AbstractLongIdAPI<T extends AbstractLongEntity> extends AbstractAPI<T> {
+
+    public abstract AbstractLongIdDao<T> getDao();
+
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")

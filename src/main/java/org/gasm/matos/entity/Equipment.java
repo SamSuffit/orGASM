@@ -1,6 +1,5 @@
 package org.gasm.matos.entity;
 
-import com.google.appengine.api.datastore.EmbeddedEntity;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -15,13 +14,12 @@ import org.gasm.matos.entity.rental.RentalRecord;
 import org.gasm.matos.entity.visitor.EquipmentVisitor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class Equipment extends AbstractEntity {
+public abstract class Equipment extends AbstractStringEntity {
 	  
 	@Id
 	private String reference;

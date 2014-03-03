@@ -1,6 +1,5 @@
 package org.gasm.matos.rest.json.enums;
 
-import org.gasm.matos.entity.enums.Brand;
 import org.gasm.matos.entity.rental.entity.Payment;
 
 import javax.ws.rs.GET;

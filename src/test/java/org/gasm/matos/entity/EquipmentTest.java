@@ -1,6 +1,5 @@
 package org.gasm.matos.entity;
 
-import junit.framework.Assert;
 import org.apache.commons.lang3.time.DateUtils;
 import org.fest.assertions.Assertions;
 import org.gasm.matos.entity.enums.Brand;
@@ -9,7 +8,6 @@ import org.gasm.matos.entity.exception.IllegalRentStatusException;
 import org.gasm.matos.entity.rental.DivingEvent;
 import org.gasm.matos.entity.rental.RentalRecord;
 import org.gasm.matos.rest.exception.ItemNotFoundException;
-import org.gasm.matos.rest.json.RentalRecordAPI;
 import org.gasm.persistance.test.AbstractDatastoreTest;
 import org.junit.Before;
 import org.junit.Test;

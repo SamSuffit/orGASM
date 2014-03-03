@@ -1,11 +1,8 @@
 package org.gasm.matos.rest.json;
 
 import org.gasm.matos.dao.EquipmentDao;
-import org.gasm.matos.dao.JacketDao;
 import org.gasm.matos.entity.Equipment;
-import org.gasm.matos.entity.Jacket;
 import org.gasm.matos.entity.exception.IllegalRentStatusException;
-import org.gasm.persistance.dao.AbstractStringIdDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

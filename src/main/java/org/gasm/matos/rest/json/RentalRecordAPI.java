@@ -1,9 +1,12 @@
 package org.gasm.matos.rest.json;
 
-import com.googlecode.objectify.VoidWork;
 import org.apache.commons.lang3.StringUtils;
-import org.gasm.matos.dao.*;
-import org.gasm.matos.entity.*;
+import org.gasm.concurrency.KeyMutex;
+import org.gasm.matos.dao.AdherentDao;
+import org.gasm.matos.dao.DivingEventDao;
+import org.gasm.matos.dao.EquipmentDao;
+import org.gasm.matos.dao.RentalRecordDao;
+import org.gasm.matos.entity.Equipment;
 import org.gasm.matos.entity.exception.IllegalRentStatusException;
 import org.gasm.matos.entity.rental.DivingEvent;
 import org.gasm.matos.entity.rental.RentalRecord;
@@ -14,11 +17,16 @@ import org.gasm.persistance.dao.AbstractLongIdDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.logging.Logger;
 
-import static com.googlecode.objectify.ObjectifyService.ofy;
+import static org.gasm.concurrency.KeyMutex.acquireMutex;
+import static org.gasm.concurrency.KeyMutex.getMutex;
+import static org.gasm.concurrency.KeyMutex.releaseMutex;
 
 @Path("/rentalRecord")
 public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
+
+    private final Logger log = Logger.getLogger(getClass().getName());
 
     private RentalRecordDao dao;
 
@@ -27,6 +35,7 @@ public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
     private AdherentDao adherentDao;
 
     public RentalRecordAPI() {
+        super();
         dao = new RentalRecordDao();
         equipmentDao = new EquipmentDao();
         divingEventDao = new DivingEventDao();
@@ -66,8 +75,14 @@ public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
     public void addToDivingEvent(@QueryParam("dEventId") Long dEventId
             , @QueryParam("renterId") final Long  renterId
             , @QueryParam("equipmentId") final String equipmentId
+    ) throws ItemNotFoundException, IllegalRentStatusException, InterruptedException {
 
-    ) throws ItemNotFoundException, IllegalRentStatusException {
+        // Pas plusieurs ordres de loc en même temps sur la même sortie...
+        final String key = Long.toString(dEventId);
+        KeyMutex.Mutex mutex = getMutex(key);
+        acquireMutex(mutex);
+
+        log.info("addToDivingEvent dEventId:" + dEventId + " renterId:" + renterId + " equipmentId:" + equipmentId);
 
         if(renterId == null) {
             throw new ItemNotFoundException("No renterId specified");
@@ -83,6 +98,8 @@ public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
         final RentalRecord record = dEvent.getRentalRecord(renterId);
         addEquipment(record, equipmentId);
         saveRentalRecord(record, dEvent);
+
+        releaseMutex(mutex);
     }
 
     private DivingEvent loadDivingEvent(Long dEventId) throws ItemNotFoundException {
@@ -97,15 +114,10 @@ public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
     }
 
     private void saveRentalRecord(final RentalRecord record, final DivingEvent dEvent) throws ItemNotFoundException, IllegalRentStatusException {
-        ofy().transact(new VoidWork() {
-            @Override
-            public void vrun() {
-                dao.createOrUpdate(record);
-                dEvent.addRentalRecord(record);
-                divingEventDao.createOrUpdate(dEvent);
 
-            }
-        });
+        dao.createOrUpdate(record);
+        dEvent.addRentalRecord(record);
+        divingEventDao.createOrUpdate(dEvent);
 
         for(Equipment equipment: record.getEquipments()) {
             equipment.rent(record);

@@ -6,6 +6,8 @@
         "karma" : "*",
         "karma-junit-reporter" : "*",    
         "karma-jasmine" : "*",
-        "karma-ng-scenario" : "*"
-    }
+        "karma-ng-scenario" : "*",
+        "http-proxy": "0.8.x",
+        "connect": "2.3.x"
+  }
 }
