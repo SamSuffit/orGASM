@@ -7,5 +7,4 @@ public enum Brand {
 	CKI,
 	Scubapro,
 	Roth;
-	
 }

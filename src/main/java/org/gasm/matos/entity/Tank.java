@@ -7,6 +7,9 @@ import java.util.Date;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gasm.matos.dao.TankDao;
 import org.gasm.matos.entity.enums.Capacity;
+import org.gasm.matos.entity.enums.Gaz;
+import org.gasm.matos.entity.enums.Material;
+import org.gasm.matos.entity.enums.Screw;
 import org.gasm.matos.entity.visitor.EquipmentVisitor;
 import org.gasm.persistance.dao.AbstractDao;
 
@@ -15,72 +18,73 @@ import com.googlecode.objectify.annotation.EntitySubclass;
 @EntitySubclass(index = true)
 public class Tank extends Equipment {
 
-	// Brand is an equipment property (Nom du fabricant)
+	// Brand is an equipment property
 
 	/**
-	 * Numéro de série
+	 * Serial number of this item
 	 */
 	private String serialNumber;
 
 	/**
-	 * Matière : acier ou aluminium
+	 * Material (enum)
 	 */
-	private String material;
+	private Material material;
 
 	/**
-	 * Désignation du gaz contenu : air, oxygène, mélange, etc.
+	 * Gaz type contain in the tank
 	 */
-	private String gazType;
+	private Gaz gaz;
 
 	/**
-	 * Type de pas de vis
+	 * Screw type
 	 */
-	private String screwType;
+	private Screw screw;
 
 	/**
-	 * Poids à vide en kg
+	 * Weight (empty) unit is kg
 	 */
 	private BigDecimal weight;
 
 	/**
-	 * Volume intérieur dit volume en eau (capacité) The Tank capacity
+	 * The Tank capacity (liquide capacity)
 	 */
-	private Capacity blockCapacity;
+	private Capacity capacity;
 
 	/**
-	 * Date de fabrication
+	 * Build date
 	 */
 	private Date buildDate;
 
 	/**
-	 * Pression de chargement ou pression de service exprimée en - bar
+	 * Operating pressure (unit in bar)
 	 */
 	private BigInteger operatingPressure;
 
 	/**
-	 * Pression de ré-épreuve à 15° (exprimée en bar)
+	 * Test pressure (at 15° , unit in bar)
 	 */
 	private BigInteger testPressure;
 
 	/**
-	 * Date de ré-épreuve
+	 * Date of the last test
 	 */
 	private Date testDate;
 
 	/**
-	 * poinçon de l'organisme vérificateur.
+	 * Punch of the certification organism (is the punch on the tank?).
 	 */
-	private String punch;
+	private boolean punch;
 
 	/**
-	 * Date dernier TIV
+	 * Date of the last TIV
 	 */
-	private Date lastTIVDate;
+	private Date lastDateOfTIV;
 
 	/**
-	 * Etat : dispo à la location, à ne pas louer (pb sur le bloc), déjà loué
+	 * Status of the tank, can it be rent ? If it can't, that means this tank
+	 * has an issu and it mustn't be rent.
 	 */
-	private String status;
+	private boolean status;
 
 	@Override
 	public String getType() {
@@ -95,28 +99,28 @@ public class Tank extends Equipment {
 		this.serialNumber = serialNumber;
 	}
 
-	public String getMaterial() {
+	public Material getMaterial() {
 		return material;
 	}
 
-	public void setMaterial(String material) {
+	public void setMaterial(Material material) {
 		this.material = material;
 	}
 
-	public String getGazType() {
-		return gazType;
+	public Gaz getGaz() {
+		return gaz;
 	}
 
-	public void setGazType(String gazType) {
-		this.gazType = gazType;
+	public void setGaz(Gaz gaz) {
+		this.gaz = gaz;
 	}
 
-	public String getScrewType() {
-		return screwType;
+	public Screw getScrew() {
+		return screw;
 	}
 
-	public void setScrewType(String screwType) {
-		this.screwType = screwType;
+	public void setScrew(Screw screw) {
+		this.screw = screw;
 	}
 
 	public BigDecimal getWeight() {
@@ -125,6 +129,14 @@ public class Tank extends Equipment {
 
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
+	}
+
+	public Capacity getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Capacity capacity) {
+		this.capacity = capacity;
 	}
 
 	public Date getBuildDate() {
@@ -159,27 +171,27 @@ public class Tank extends Equipment {
 		this.testDate = testDate;
 	}
 
-	public String getPunch() {
+	public boolean isPunch() {
 		return punch;
 	}
 
-	public void setPunch(String punch) {
+	public void setPunch(boolean punch) {
 		this.punch = punch;
 	}
 
-	public Date getLastTIVDate() {
-		return lastTIVDate;
+	public Date getLastDateOfTIV() {
+		return lastDateOfTIV;
 	}
 
-	public void setLastTIVDate(Date lastTIVDate) {
-		this.lastTIVDate = lastTIVDate;
+	public void setLastDateOfTIV(Date lastDateOfTIV) {
+		this.lastDateOfTIV = lastDateOfTIV;
 	}
 
-	public String getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
@@ -196,14 +208,6 @@ public class Tank extends Equipment {
 
 	@Override
 	public double getPrice() {
-		return getBlockCapacity() == Capacity.Litre_15 ? 6 : 4.5;
-	}
-
-	public Capacity getBlockCapacity() {
-		return blockCapacity;
-	}
-
-	public void setBlockCapacity(Capacity blockCapacity) {
-		this.blockCapacity = blockCapacity;
+		return getCapacity() == Capacity.Litre_12 ? 4.5 : 6;
 	}
 }
