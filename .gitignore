@@ -11,3 +11,4 @@ target/surefire-reports/
 target/mindful-girder-344-1.0-SNAPSHOT/angularApps/
 target/mindful-girder-344-1.0-SNAPSHOT/META-INF/
 target/mindful-girder-344-1.0-SNAPSHOT/index.html
+.settings/
