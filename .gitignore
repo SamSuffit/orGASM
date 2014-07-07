@@ -6,9 +6,6 @@
 *.ear
 .idea/
 src/main/webapp/angularApps/node_modules/
-target/surefire-reports/org.gasm.matos.entity.rental.billing.BillingProcessorTest.txt
-target/surefire-reports/
-target/mindful-girder-344-1.0-SNAPSHOT/angularApps/
-target/mindful-girder-344-1.0-SNAPSHOT/META-INF/
-target/mindful-girder-344-1.0-SNAPSHOT/index.html
+.settings/
+target/
 .settings/
