@@ -40,14 +40,15 @@ angular.module('myApp.controllers', [])
             $scope.brands = Brand.query();
         }])
     .controller('tankListCtrl', ['$scope' ,'Tank', 'adminHelperService' ,
-        'Brand','Capacity',
-        function($scope,Tank,adminHelperService,Brand,Capacity) {
+        'Brand','Capacity','Gaz',
+        function($scope,Tank,adminHelperService,Brand,Capacity, Gaz) {
             $scope.$parent.location = 'Liste des blocs';
             $scope.$parent.title = 'Administration des blocs';
             $scope.$parent.titleSmall = '';
             adminHelperService.init($scope, Tank, function() { return new Tank()});
             $scope.brands = Brand.query();
             $scope.capacities = Capacity.query();
+            $scope.gazes = Gaz.query();
         }])
     .controller('suitListCtrl', ['$scope' ,'Suit', 'adminHelperService' ,
         'Brand','Size','SuitPart',

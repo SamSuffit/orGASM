@@ -4,7 +4,8 @@
             <p>
             <ul>
             	<li>Brand: {{tank.brand}}</li>
-            	<li>Capacity: {{tank.blockCapacity}}</li>
+            	<li>Capacity: {{tank.capacity}}</li>
+                <li>Gaz: {{tank.gaz}}</li>
                 <li>
                     <button type="button" class="btn btn-primary btn-sm" ng-click="edit(tank.reference)">Editer</button>
                     <button type="button" class="btn btn-danger" ng-click="remove(tank.reference)">Effacer</button>
@@ -26,8 +27,13 @@
         </div>
         <div class="form-group">
             <label for="blockCapacity">Capacité</label>
-            <select id="blockCapacity" class="form-control" placeholder="Sélectionner une capacité" ng-model="newItem.blockCapacity"
+            <select id="blockCapacity" class="form-control" placeholder="Sélectionner une capacité" ng-model="newItem.capacity"
                     ng-options="it.label as it.label for it in capacities" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="blockGaz">Gaz</label>
+            <select id="blockGaz" class="form-control" placeholder="Sélectionner un GAZ" ng-model="newItem.gaz"
+                    ng-options="it.label as it.label for it in gazes" class="form-control"></select>
         </div>
         <div class="pull-right">
             <button type="button" class="btn btn-primary" ng-click="create()" >{{createButtonCaption}}</button>

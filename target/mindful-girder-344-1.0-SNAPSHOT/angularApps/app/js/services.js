@@ -73,6 +73,12 @@ angular.module('myApp.services', ['ngResource'])
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
+    .factory('Gaz', ['$resource',
+        function($resource){
+            return $resource('/api/gaz/:itemId', {itemId:'@id'}, {
+                query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
+            });
+        }])
     // -----------------Enums ends-----------------------------------
     .factory('Adherent', ['$resource',
         function($resource){
