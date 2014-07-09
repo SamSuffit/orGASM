@@ -7,6 +7,8 @@ angular.module('myApp.controllers', [])
         $scope.$parent.location = 'Home';
         $scope.$parent.title = "Bienvenue dans l'application de gestion de location du GASM";
         $scope.$parent.titleSmall = '';
+        $scope.true = true;
+        $scope.false = false;
     }])
     .controller('rentedEquipmentCtrl',  ['$scope' ,'Equipment' , function($scope,Equipment) {
         $scope.$parent.location = 'Matos loué';
@@ -40,8 +42,8 @@ angular.module('myApp.controllers', [])
             $scope.brands = Brand.query();
         }])
     .controller('tankListCtrl', ['$scope' ,'Tank', 'adminHelperService' ,
-        'Brand','Capacity','Gaz',
-        function($scope,Tank,adminHelperService,Brand,Capacity, Gaz) {
+        'Brand','Capacity','Gaz','Material','Screw',
+        function($scope,Tank,adminHelperService,Brand,Capacity, Gaz, Material, Screw) {
             $scope.$parent.location = 'Liste des blocs';
             $scope.$parent.title = 'Administration des blocs';
             $scope.$parent.titleSmall = '';
@@ -49,6 +51,8 @@ angular.module('myApp.controllers', [])
             $scope.brands = Brand.query();
             $scope.capacities = Capacity.query();
             $scope.gazes = Gaz.query();
+            $scope.materials = Material.query();
+            $scope.screws = Screw.query();
         }])
     .controller('suitListCtrl', ['$scope' ,'Suit', 'adminHelperService' ,
         'Brand','Size','SuitPart',
@@ -104,7 +108,6 @@ angular.module('myApp.controllers', [])
                     $scope.tanks = Tank.query();
                     $scope.payments = Payment.query();
                     $scope.suits = Suit.query();
-
 
                     $scope.createButtonCaption = "Créer";
                     $scope.jacket = null;

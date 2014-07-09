@@ -22,31 +22,37 @@ public class Tank extends Equipment {
 
 	/**
 	 * Serial number of this item
+     * ==
 	 */
 	private String serialNumber;
 
 	/**
 	 * Material (enum)
+     * ==
 	 */
 	private Material material;
 
 	/**
-	 * Gaz type contain in the tank
+	 * Gaz type contain in the tank (enum)
+     * ==
 	 */
 	private Gaz gaz;
 
 	/**
-	 * Screw type
+	 * Screw type (enum)
+     * ==
 	 */
 	private Screw screw;
 
-	/**
-	 * Weight (empty) unit is kg
-	 */
-	private BigDecimal weight;
+    /**
+     * Weight of the empty tank
+     * ==
+     */
+	private double weight;
 
 	/**
 	 * The Tank capacity (liquide capacity)
+     * ==
 	 */
 	private Capacity capacity;
 
@@ -55,19 +61,10 @@ public class Tank extends Equipment {
 	 */
 	private Date buildDate;
 
-	/**
-	 * Operating pressure (unit in bar)
-	 */
-	private BigInteger operatingPressure;
+	private double operatingPressure;
 
-	/**
-	 * Test pressure (at 15° , unit in bar)
-	 */
-	private BigInteger testPressure;
+	private double testPressure;
 
-	/**
-	 * Date of the last test
-	 */
 	private Date testDate;
 
 	/**
@@ -123,14 +120,6 @@ public class Tank extends Equipment {
 		this.screw = screw;
 	}
 
-	public BigDecimal getWeight() {
-		return weight;
-	}
-
-	public void setWeight(BigDecimal weight) {
-		this.weight = weight;
-	}
-
 	public Capacity getCapacity() {
 		return capacity;
 	}
@@ -147,23 +136,10 @@ public class Tank extends Equipment {
 		this.buildDate = buildDate;
 	}
 
-	public BigInteger getOperatingPressure() {
-		return operatingPressure;
-	}
-
-	public void setOperatingPressure(BigInteger operatingPressure) {
-		this.operatingPressure = operatingPressure;
-	}
-
-	public BigInteger getTestPressure() {
-		return testPressure;
-	}
-
-	public void setTestPressure(BigInteger testPressure) {
-		this.testPressure = testPressure;
-	}
-
-	public Date getTestDate() {
+	/**
+	 * Date of the last test
+	 */
+    public Date getTestDate() {
 		return testDate;
 	}
 
@@ -195,6 +171,8 @@ public class Tank extends Equipment {
 		this.status = status;
 	}
 
+
+
 	@JsonIgnore
 	@Override
 	public AbstractDao getDao() {
@@ -210,4 +188,37 @@ public class Tank extends Equipment {
 	public double getPrice() {
 		return getCapacity() == Capacity.Litre_12 ? 4.5 : 6;
 	}
+
+    /**
+     * Weight (empty) unit is kg
+     */
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    /**
+     * Test pressure (at 15° , unit in bar)
+     */
+    public double getTestPressure() {
+        return testPressure;
+    }
+
+    public void setTestPressure(double testPressure) {
+        this.testPressure = testPressure;
+    }
+
+    /**
+     * Operating pressure (unit in bar)
+     */
+    public double getOperatingPressure() {
+        return operatingPressure;
+    }
+
+    public void setOperatingPressure(double operatingPressure) {
+        this.operatingPressure = operatingPressure;
+    }
 }
