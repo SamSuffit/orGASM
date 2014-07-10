@@ -22,37 +22,37 @@ public class Tank extends Equipment {
 
 	/**
 	 * Serial number of this item
-     * ==
+     *
 	 */
 	private String serialNumber;
 
 	/**
 	 * Material (enum)
-     * ==
+     *
 	 */
 	private Material material;
 
 	/**
 	 * Gaz type contain in the tank (enum)
-     * ==
+     *
 	 */
 	private Gaz gaz;
 
 	/**
 	 * Screw type (enum)
-     * ==
+     *
 	 */
 	private Screw screw;
 
     /**
      * Weight of the empty tank
-     * ==
+     *
      */
 	private double weight;
 
 	/**
 	 * The Tank capacity (liquide capacity)
-     * ==
+     *
 	 */
 	private Capacity capacity;
 
@@ -61,10 +61,19 @@ public class Tank extends Equipment {
 	 */
 	private Date buildDate;
 
+    /**
+     * Usage tank pressure
+     */
 	private double operatingPressure;
 
+    /**
+     * Test tank pressure
+     */
 	private double testPressure;
 
+    /**
+     * Date of the tank test
+     */
 	private Date testDate;
 
 	/**
@@ -170,8 +179,6 @@ public class Tank extends Equipment {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-
-
 
 	@JsonIgnore
 	@Override
