@@ -53,6 +53,30 @@ angular.module('myApp.controllers', [])
             $scope.gazes = Gaz.query();
             $scope.materials = Material.query();
             $scope.screws = Screw.query();
+
+            $scope.$watch('newItem.lastDateOfTIV', function(v){ // using the example model from the datepicker docs
+                if( v != undefined && !(v instanceof Date)) {
+                    try {
+                        $scope.newItem.lastDateOfTIV= new Date(v);
+                    } catch (e) {}
+                }
+            });
+
+            $scope.$watch('newItem.testDate', function(v){ // using the example model from the datepicker docs
+                if( v != undefined && !(v instanceof Date)) {
+                    try {
+                        $scope.newItem.testDate= new Date(v);
+                    } catch (e) {}
+                }
+            });
+
+            $scope.$watch('newItem.buildDate', function(v){ // using the example model from the datepicker docs
+                if( v != undefined && !(v instanceof Date)) {
+                    try {
+                        $scope.newItem.buildDate= new Date(v);
+                    } catch (e) {}
+                }
+            });
         }])
     .controller('suitListCtrl', ['$scope' ,'Suit', 'adminHelperService' ,
         'Brand','Size','SuitPart',

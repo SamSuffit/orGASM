@@ -55,7 +55,7 @@
         </div>
         <div class="form-group">
             <label for="buildDate">Date de fabrication</label>
-            <input id="buildDate" class="form-control" placeholder="Entrer une valeur" ng-model="newItem.buildDate" class="form-control" type="date">
+            <input class="form-control" placeholder="Entrer une date" id="buildDate" ng-model="newItem.buildDate" data-date-format="dd/mm/yyyy" data-bs-datepicker />
         </div>
         <div class="form-group">
             <label for="operatingPressure">Pression de chargement ou pression de service (exprimée en bar)</label>
@@ -66,8 +66,8 @@
             <input id="testPressure" class="form-control" placeholder="Entrer une valeur" ng-model="newItem.testPressure" class="form-control" type="number" step="any">
         </div>
         <div class="form-group">
-            <label for="testDate">Date de ré-épreuve {{newItem.testDate | date: "yyyy-MM-dd"}}</label>
-            <input id="testDate" class="form-control" placeholder="Entrer une valeur" ng-model="newItem.testDate" class="form-control" type="date">
+            <label for="testDate">Date de ré-épreuve</label>
+            <input class="form-control" placeholder="Entrer une date" id="testDate" ng-model="newItem.testDate" data-date-format="dd/mm/yyyy" data-bs-datepicker />
         </div>
 
         <div class="form-group">
@@ -83,8 +83,8 @@
         </div>
 
         <div class="form-group">
-            <label for="lastDateOfTIV">Date du dernier TIV {{newItem.lastDateOfTIV | date: "yyyy-MM-dd"}}</label>
-            <input id="lastDateOfTIV" class="form-control" placeholder="Entrer une valeur" ng-model="newItem.lastDateOfTIV" ng-value="newItem.lastDateOfTIV" class="form-control" type="date">
+            <label for="lastDateOfTIV">Date du dernier TIV</label>
+            <input class="form-control" placeholder="Entrer une date" id="lastDateOfTIV" ng-model="newItem.lastDateOfTIV" data-date-format="dd/mm/yyyy" data-bs-datepicker />
         </div>
 
         <div class="form-group">
