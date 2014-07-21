@@ -5,6 +5,6 @@ public enum Brand {
 	Autre,
 	AquaLung,
 	CKI,
-	Scubapro;
-	
+	Scubapro,
+	Roth;
 }
