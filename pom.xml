@@ -7,7 +7,7 @@
 	<version>1.0-SNAPSHOT</version>
 
 	<groupId>com.google.devrel.samples.helloendpoints</groupId>
-	<artifactId>mindful-girder-344</artifactId>
+	<artifactId>gasmrent-webapp</artifactId>
 
 	<properties>
 		<appengine.app.version>1</appengine.app.version>
