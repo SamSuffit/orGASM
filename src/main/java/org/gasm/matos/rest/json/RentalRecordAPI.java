@@ -72,7 +72,7 @@ public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
     @PUT
     @Path("addToDivingEvent")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public void addToDivingEvent(@QueryParam("dEventId") Long dEventId
+    public RentalRecord addToDivingEvent(@QueryParam("dEventId") Long dEventId
             , @QueryParam("renterId") final Long  renterId
             , @QueryParam("equipmentId") final String equipmentId
     ) throws ItemNotFoundException, IllegalRentStatusException, InterruptedException {
@@ -100,6 +100,8 @@ public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {
         saveRentalRecord(record, dEvent);
 
         releaseMutex(mutex);
+
+        return record;
     }
 
     private DivingEvent loadDivingEvent(Long dEventId) throws ItemNotFoundException {
