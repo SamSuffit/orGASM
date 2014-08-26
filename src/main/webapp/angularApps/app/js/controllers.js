@@ -12,7 +12,7 @@ angular.module('myApp.controllers', [])
     }])
     .controller('rentedEquipmentCtrl',  ['$scope' ,'Equipment' , function($scope,Equipment) {
         $scope.$parent.location = 'Matos loué';
-        $scope.$parent.title = 'Yo ça pête non ????';
+        $scope.$parent.title = 'Liste du matériel actuellement en location';
         $scope.$parent.titleSmall = '';
         $scope.equipments = Equipment.findAllRented();
 
