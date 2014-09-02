@@ -30,6 +30,18 @@
                     ng-options="it.label as it.label for it in brands" class="form-control"></select>
         </div>
 
+        <div class="form-group">
+            <label>Status (est-ce que l'équipement peut être louée ?)</label>
+            <div>
+                <label  for="statusTrue">
+                    <input type="radio" id="statusTrue" class="form-control" ng-model="newItem.status" ng-value="true" >Oui
+                </label>
+                <label for="statusFalse">
+                    <input type="radio" id="statusFalse" class="form-control" ng-model="newItem.status" ng-value="false" >Non
+                </label>
+            </div>
+        </div>
+
         <div class="pull-right">
             <button type="button" class="btn btn-primary" ng-click="create()" >{{createButtonCaption}}</button>
             <button type="button" class="btn btn-primary" ng-click="cancel()">Annuler</button>

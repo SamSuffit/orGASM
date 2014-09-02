@@ -86,12 +86,6 @@ public class Tank extends Equipment {
 	 */
 	private Date lastDateOfTIV;
 
-	/**
-	 * Status of the tank, can it be rent ? If it can't, that means this tank
-	 * has an issu and it mustn't be rent.
-	 */
-	private boolean status;
-
 	@Override
 	public String getType() {
 		return "Tank";
@@ -170,14 +164,6 @@ public class Tank extends Equipment {
 
 	public void setLastDateOfTIV(Date lastDateOfTIV) {
 		this.lastDateOfTIV = lastDateOfTIV;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
 	}
 
 	@JsonIgnore

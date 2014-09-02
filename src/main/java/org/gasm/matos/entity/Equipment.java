@@ -29,10 +29,17 @@ public abstract class Equipment extends AbstractStringEntity {
 	 */
 	private Brand brand;
 
+    /**
+     * Status of the equipment, can it be rent ?
+     * If it can't, that means it has an issu and it mustn't be rent.
+     */
+    private boolean status;
+
     @JsonIgnore
     private Ref<RentalRecord> rentalRecord;
 
     private List<Ref<RentHistory>> historyList;
+
     private final RentHistoryDao rentHistoryDao = new RentHistoryDao();
 
     public abstract String getType();
@@ -138,4 +145,11 @@ public abstract class Equipment extends AbstractStringEntity {
         return ObjectifyHelper.toList(historyList);
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }
