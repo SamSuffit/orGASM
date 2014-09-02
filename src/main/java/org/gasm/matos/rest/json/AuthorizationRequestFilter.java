@@ -2,13 +2,15 @@ package org.gasm.matos.rest.json;
 
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
+
 import org.apache.commons.lang3.StringUtils;
+import org.gasm.security.SecurityManagerHashMapImpl;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
+
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,14 +22,21 @@ import java.io.IOException;
 @Provider
 public class AuthorizationRequestFilter implements ContainerRequestFilter {
 
+    SecurityManagerHashMapImpl securityManager = SecurityManagerHashMapImpl.getInstance();
+
     @Override
     public ContainerRequest filter(ContainerRequest requestContext) {
 
+
+
         if(!StringUtils.startsWith(requestContext.getPath(),"securityManager")) {
-            Response.ResponseBuilder builder = null;
-            String response = "UNAUTHORIZED Access";
-            builder = Response.status(Response.Status.UNAUTHORIZED).entity(response);
-            throw new WebApplicationException(builder.build());
+
+            if(!securityManager.isValid(requestContext.getQueryParameters().getFirst("securityKey"))) {
+                Response.ResponseBuilder builder = null;
+                String response = "UNAUTHORIZED Access";
+                builder = Response.status(Response.Status.UNAUTHORIZED).entity(response);
+                throw new WebApplicationException(builder.build());
+             }
         }
 
         return requestContext;

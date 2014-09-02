@@ -17,21 +17,21 @@ import org.gasm.security.SecurityManagerHashMapImpl;
 @Path("/securityManager")
 public class SecurityManagerAPI implements SecurityManager {
 
-    private SecurityManager delegate;
+    private SecurityManager securityManager;
 
     public SecurityManagerAPI() {
-        delegate = SecurityManagerHashMapImpl.getInstance();
+        securityManager = SecurityManagerHashMapImpl.getInstance();
     }
 
     @Path("getSecurityKey")
     @Override
     @GET
     public String getSecurityKey(@QueryParam("login") String login, @QueryParam("password") String password) {
-        return delegate.getSecurityKey(login,password);
+        return securityManager.getSecurityKey(login,password);
     }
 
     @Override
     public boolean isValid(String securityKey) {
-        return delegate.isValid(securityKey);
+        return securityManager.isValid(securityKey);
     }
 }
