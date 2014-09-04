@@ -22,10 +22,10 @@ public class Adherent extends AbstractLongEntity {
         return new AdherentDao();
     }
 
-    public Adherent() {};
+    public Adherent() {}
     public Adherent(Long id) {
         this.id = id;
-    };
+    }
 
 
 	@Id

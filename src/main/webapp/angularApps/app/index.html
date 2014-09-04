@@ -84,8 +84,38 @@
 
 
 <script type="text/javascript">
-    var $injector = angular.bootstrap(document, ['myApp']);
-    console.log('Angular bootstrap complete');
+    if(typeof(Storage) !== undefined) {
+        // Code for localStorage/sessionStorage.
+        if(localStorage.securityKey === undefined ) {
+            redirectLoginPage();
+        } else {
+            var urlPrefix =  window.location.href.indexOf('localhost:8000') != -1 ? 'http://localhost:8080' : '';
+            $.ajax(urlPrefix + '/api/securityManager/isValid?securityKey=' + localStorage.securityKey ) .success(function(data) {
+                if(data === undefined || data === '' || data == false) {
+                    redirectLoginPage();
+                };
+            });
+        }
+
+        var $injector = angular.bootstrap(document, ['myApp']);
+        console.log('Angular bootstrap complete');
+
+    } else {
+        // Sorry! No Web Storage support..
+        alert("Your browser is not supported");
+
+    }
+
+var redirectLoginPage = function () {
+    var url = window.location.href;
+    //Remove all after #
+    if(url.lastIndexOf('#') != -1)  {
+        url = url.substring(0,url.lastIndexOf('#'));
+    }
+    var url = url.substring(0,  url.lastIndexOf('/'));
+    window.location.href = url +'/login.html';
+};
+
 </script>
 
 

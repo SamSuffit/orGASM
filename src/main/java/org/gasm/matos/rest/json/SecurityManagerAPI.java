@@ -2,7 +2,9 @@ package org.gasm.matos.rest.json;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import org.gasm.security.SecurityManager;
 import org.gasm.security.SecurityManagerHashMapImpl;
@@ -30,8 +32,11 @@ public class SecurityManagerAPI implements SecurityManager {
         return securityManager.getSecurityKey(login,password);
     }
 
+    @Path("isValid")
     @Override
-    public boolean isValid(String securityKey) {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public boolean isValid(@QueryParam("securityKey") String securityKey) {
         return securityManager.isValid(securityKey);
     }
 }

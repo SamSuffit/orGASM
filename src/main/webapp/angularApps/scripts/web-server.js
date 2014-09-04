@@ -5,8 +5,6 @@ var util = require('util'),
     fs = require('fs'),
     url = require('url'),
     events = require('events');
-    httpProxy  = require('http-proxy');
-connect   = require('connect');
 
 var DEFAULT_PORT = 8000;
 
@@ -43,6 +41,7 @@ function HttpServer(handlers) {
 HttpServer.prototype.start = function(port) {
   this.port = port;
   this.server.listen(port);
+  util.puts('Http Server running at http://localhost:' + port + '/');
 };
 
 HttpServer.prototype.parseUrl_ = function(urlString) {
@@ -240,29 +239,6 @@ StaticServlet.prototype.writeDirectoryIndex_ = function(req, res, path, files) {
   res.write('</ol>');
   res.end();
 };
-
-var endpoint  = {
-    host:   'localhost', // or IP address
-    port:   8080,
-    prefix: '/api'
-};
-    staticDir = 'public';
-
-var proxy = new httpProxy.RoutingProxy();
-var app = connect()
-    .use(connect.logger('dev'))
-    .use(function(req, res) {
-        if (req.url.indexOf(endpoint.prefix) === 0) {
-            proxy.proxyRequest(req, res, endpoint);
-        }
-        else {
-            proxy.proxyRequest(req, res, { host:   'localhost', // or IP address
-                port:   DEFAULT_PORT});
-        }
-    })
-    .use(connect.static(staticDir))
-    .listen(4242);
-util.puts('Http Server running at http://localhost:' + 4242 + '/');
 
 // Must be last,
 main(process.argv);
