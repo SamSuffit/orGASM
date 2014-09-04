@@ -20,7 +20,7 @@ public interface SecurityManager {
     /**
      *
      * @param securityKey
-     * @return true if security key is valid
+     * @return true if security key is valid, false otherwise
      */
     public boolean isValid(String securityKey);
 }
