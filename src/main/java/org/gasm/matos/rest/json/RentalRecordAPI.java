@@ -19,9 +19,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.logging.Logger;
 
-import static org.gasm.concurrency.KeyMutex.acquireMutex;
-import static org.gasm.concurrency.KeyMutex.getMutex;
-import static org.gasm.concurrency.KeyMutex.releaseMutex;
+import static org.gasm.concurrency.KeyMutex.*;
 
 @Path("/rentalRecord")
 public class RentalRecordAPI extends AbstractLongIdAPI<RentalRecord> {

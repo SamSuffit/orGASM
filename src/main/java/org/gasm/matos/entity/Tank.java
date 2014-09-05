@@ -1,9 +1,6 @@
 package org.gasm.matos.entity;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Date;
-
+import com.googlecode.objectify.annotation.EntitySubclass;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gasm.matos.dao.TankDao;
 import org.gasm.matos.entity.enums.Capacity;
@@ -13,7 +10,7 @@ import org.gasm.matos.entity.enums.Screw;
 import org.gasm.matos.entity.visitor.EquipmentVisitor;
 import org.gasm.persistance.dao.AbstractDao;
 
-import com.googlecode.objectify.annotation.EntitySubclass;
+import java.util.Date;
 
 @EntitySubclass(index = true)
 public class Tank extends Equipment {
