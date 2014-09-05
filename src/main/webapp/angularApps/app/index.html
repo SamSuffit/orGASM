@@ -84,6 +84,17 @@
 
 
 <script type="text/javascript">
+
+var redirectLoginPage = function () {
+    var url = window.location.href;
+    //Remove all after #
+    if(url.lastIndexOf('#') != -1)  {
+        url = url.substring(0,url.lastIndexOf('#'));
+    }
+    var url = url.substring(0,  url.lastIndexOf('/'));
+    window.location.href = url +'/login.html';
+};
+$(function() {
     if(typeof(Storage) !== undefined) {
         // Code for localStorage/sessionStorage.
         if(localStorage.securityKey === undefined ) {
@@ -105,16 +116,9 @@
         alert("Your browser is not supported");
 
     }
+});
 
-var redirectLoginPage = function () {
-    var url = window.location.href;
-    //Remove all after #
-    if(url.lastIndexOf('#') != -1)  {
-        url = url.substring(0,url.lastIndexOf('#'));
-    }
-    var url = url.substring(0,  url.lastIndexOf('/'));
-    window.location.href = url +'/login.html';
-};
+
 
 </script>
 

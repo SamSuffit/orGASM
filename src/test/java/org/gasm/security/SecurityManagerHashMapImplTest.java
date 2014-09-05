@@ -1,5 +1,6 @@
 package org.gasm.security;
 
+import org.gasm.persistance.test.AbstractDatastoreTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -12,7 +13,7 @@ import org.junit.Test;
  * Time: 13:54
  * To change this template use File | Settings | File Templates.
  */
-public class SecurityManagerHashMapImplTest {
+public class SecurityManagerHashMapImplTest extends AbstractDatastoreTest {
 
     SecurityManagerHashMapImpl securityManager;
 
@@ -24,14 +25,23 @@ public class SecurityManagerHashMapImplTest {
 
     @Test
     public void testIsValid() {
+
+        //Test wrong Key
         Assert.assertFalse(securityManager.isValid("dsfds"));
         Assert.assertFalse(securityManager.isValid("fdsfsdf"));
 
+        //Test admin backdoor
         String fistCall = securityManager.getSecurityKey("admin", "plongée");
         Assert.assertNotNull(fistCall);
-
         Assert.assertFalse(securityManager.isValid("dsfds"));
         Assert.assertTrue(securityManager.isValid(fistCall));
+
+        //Test allowed Adh
+        createAdherent("sasa","sasa","login","password");
+        String sasaKey = securityManager.getSecurityKey("login", "password");
+        Assert.assertNotNull(sasaKey);
+        Assert.assertFalse(securityManager.isValid("dsdsdsdd"));
+        Assert.assertTrue(securityManager.isValid(sasaKey));
     }
 
 

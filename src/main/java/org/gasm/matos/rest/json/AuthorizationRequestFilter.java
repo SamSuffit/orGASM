@@ -2,15 +2,14 @@ package org.gasm.matos.rest.json;
 
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
-
 import com.sun.jersey.spi.container.ContainerResponse;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.gasm.security.SecurityManagerHashMapImpl;
 
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-
 import javax.ws.rs.ext.Provider;
 import java.util.logging.Logger;
 
@@ -47,7 +46,9 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter , Cont
     public ContainerResponse filter(ContainerRequest containerRequest, ContainerResponse containerResponse) {
         log.fine("Origin: " + containerRequest.getHeaderValue("Origin") + " - " + containerRequest.getRequestUri());
         if(StringUtils.equals("http://localhost:8000", containerRequest.getHeaderValue("Origin"))) {
-            containerResponse.getHttpHeaders().add("Access-Control-Allow-Origin", containerRequest.getHeaderValue("Origin"));
+            final MultivaluedMap<String,Object> httpHeaders = containerResponse.getHttpHeaders();
+            httpHeaders.putSingle("Access-Control-Allow-Origin", containerRequest.getHeaderValue("Origin"));
+            httpHeaders.putSingle("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         }
         return containerResponse;
     }

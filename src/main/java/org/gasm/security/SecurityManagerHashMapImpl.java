@@ -1,8 +1,9 @@
 package org.gasm.security;
 
-import com.sun.deploy.net.offline.DeployOfflineManager;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.gasm.matos.dao.AdherentDao;
+import org.gasm.matos.entity.Adherent;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -20,9 +21,11 @@ public class SecurityManagerHashMapImpl implements SecurityManager {
 
 
     private static SecurityManagerHashMapImpl instance;
+    private final AdherentDao adherentDao;
 
     private SecurityManagerHashMapImpl() {
         reset();
+        adherentDao = new AdherentDao();
     }
 
     public static final SecurityManagerHashMapImpl getInstance() {
@@ -75,7 +78,17 @@ public class SecurityManagerHashMapImpl implements SecurityManager {
     }
 
     private boolean isAllowed(String login, String password) {
-        return StringUtils.equals("admin", login) && StringUtils.equals("plongée", password);
+        if(StringUtils.equals("admin", login) && StringUtils.equals("plongée", password) ) {
+            return true;
+        }
+        else {
+            for(Adherent ad : adherentDao.findAll()) {
+                if(StringUtils.equals(ad.getLogin(), login) && StringUtils.equals(ad.getPassword(), password) ) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
