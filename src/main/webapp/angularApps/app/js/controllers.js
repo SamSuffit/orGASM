@@ -251,4 +251,8 @@ angular.module('myApp.controllers', [])
         function($scope, displayHelperService, Regulator) {
             displayHelperService.init($scope, Regulator, "Détail du détendeur ");
     }])
+    .controller('suitDisplayCtrl', ['$scope' ,'displayHelperService' , 'Suit',
+        function($scope, displayHelperService, Suit) {
+            displayHelperService.init($scope, Suit, "Détail de la combinaison ");
+    }])
 ;
