@@ -1,0 +1,107 @@
+<ul>
+	<li ng-repeat="tank in items">
+    	<h4><a href="#/tank/{{tank.reference}}">{{tank.reference}}</a></h4>
+            <p>
+            <ul>
+            	<li>Brand: {{tank.brand}}</li>
+            	<li>Capacity: {{tank.capacity}}</li>
+                <li>Gaz: {{tank.gaz}}</li>
+                <li>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="edit(tank.reference)">Editer</button>
+                    <button type="button" class="btn btn-danger" ng-click="remove(tank.reference)">Effacer</button>
+                </li>
+            </ul>
+    </li>
+</ul>
+
+<div class="create-from">
+    <form role="form">
+        <div class="form-group">
+            <label for="reference">Référence </label>
+            <input id="reference" class="form-control" placeholder="Entrer une référence" ng-model="newItem.reference" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="serialNumber">Numéro de série</label>
+            <input id="serialNumber" class="form-control" placeholder="Entrer une valeur" ng-model="newItem.serialNumber" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="brand">Nom du fabricant</label>
+            <select id="brand" class="form-control" placeholder="Sélectionner une marque" ng-model="newItem.brand"
+                    ng-options="it.label as it.label for it in brands" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="capacity">Capacité (Volume intérieur : dit volume en eau)</label>
+            <select id="capacity" class="form-control" placeholder="Sélectionner une capacité" ng-model="newItem.capacity"
+                    ng-options="it.label as it.label for it in capacities" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="gaz">Désignation du gaz contenu</label>
+            <select id="gaz" class="form-control" placeholder="Sélectionner un GAZ" ng-model="newItem.gaz"
+                    ng-options="it.label as it.label for it in gazes" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="material">Matière du bloc</label>
+            <select id="material" class="form-control" placeholder="Sélectionner une valeur" ng-model="newItem.material"
+                    ng-options="it.label as it.label for it in materials" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="screw">Type de pas de vis</label>
+            <select id="screw" class="form-control" placeholder="Sélectionner une valeur" ng-model="newItem.screw"
+                    ng-options="it.label as it.label for it in screws" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="weight">Poids à vide (en kg)</label>
+            <input id="weight" class="form-control" placeholder="Entrer une valeur" ng-model="newItem.weight" class="form-control" type="number" step="any">
+        </div>
+        <div class="form-group">
+            <label for="buildDate">Date de fabrication</label>
+            <input class="form-control" placeholder="Entrer une date" id="buildDate" ng-model="newItem.buildDate" data-date-format="dd/mm/yyyy" data-bs-datepicker />
+        </div>
+        <div class="form-group">
+            <label for="operatingPressure">Pression de chargement ou pression de service (exprimée en bar)</label>
+            <input id="operatingPressure" class="form-control" placeholder="Entrer une valeur" ng-model="newItem.operatingPressure" class="form-control" type="number" step="any">
+        </div>
+        <div class="form-group">
+            <label for="testPressure">Pression de ré-épreuve à 15 ℃ (exprimée en bar)</label>
+            <input id="testPressure" class="form-control" placeholder="Entrer une valeur" ng-model="newItem.testPressure" class="form-control" type="number" step="any">
+        </div>
+        <div class="form-group">
+            <label for="testDate">Date de ré-épreuve</label>
+            <input class="form-control" placeholder="Entrer une date" id="testDate" ng-model="newItem.testDate" data-date-format="dd/mm/yyyy" data-bs-datepicker />
+        </div>
+
+        <div class="form-group">
+            <label>Poinçon de l'organisme vérificateur</label>
+            <div>
+                <label  for="punchTrue">
+                    <input type="radio" id="punchTrue" class="form-control" ng-model="newItem.punch" ng-value="true" >Oui
+                </label>
+                <label for="punchFalse">
+                    <input type="radio" id="punchFalse" class="form-control" ng-model="newItem.punch" ng-value="false" >Non
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastDateOfTIV">Date du dernier TIV</label>
+            <input class="form-control" placeholder="Entrer une date" id="lastDateOfTIV" ng-model="newItem.lastDateOfTIV" data-date-format="dd/mm/yyyy" data-bs-datepicker />
+        </div>
+
+        <div class="form-group">
+            <label>Status (est-ce que ce bloc peut être louée ?)</label>
+            <div>
+                <label  for="statusTrue">
+                    <input type="radio" id="statusTrue" class="form-control" ng-model="newItem.status" ng-value="true" >Oui
+                </label>
+                <label for="statusFalse">
+                    <input type="radio" id="statusFalse" class="form-control" ng-model="newItem.status" ng-value="false" >Non
+                </label>
+            </div>
+        </div>
+
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary" ng-click="create()" >{{createButtonCaption}}</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Annuler</button>
+        </div>
+    </form>
+</div>

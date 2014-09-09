@@ -1,0 +1,51 @@
+<ul>
+    <li ng-repeat="stab in items">
+        <h4><a href="#/stab/{{stab.reference}}">{{stab.reference}}</a></h4>
+        <p>
+        <ul>
+            <li>Size: {{stab.size}}</li>
+            <li>Brand: {{stab.brand}}</li>
+            <li>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="edit(stab.reference)">Editer</button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="remove(stab.reference)">Effacer</button>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<div class="create-from">
+    <form role="form">
+        <div class="form-group">
+            <label for="reference">Référence </label>
+            <input id="reference" class="form-control" placeholder="Entrer une référence" ng-model="newItem.reference" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="size">Taille</label>
+            <select id="size" class="form-control" placeholder="Sélectionner une taille" ng-model="newItem.size"
+                    ng-options="it.label as it.label for it in sizes" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="brand">Marque</label>
+            <select id="brand" class="form-control" placeholder="Sélectionner une marque" ng-model="newItem.brand"
+                    ng-options="it.label as it.label for it in brands" class="form-control"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Status (est-ce que l'équipement peut être louée ?)</label>
+            <div>
+                <label  for="statusTrue">
+                    <input type="radio" id="statusTrue" class="form-control" ng-model="newItem.status" ng-value="true" >Oui
+                </label>
+                <label for="statusFalse">
+                    <input type="radio" id="statusFalse" class="form-control" ng-model="newItem.status" ng-value="false" >Non
+                </label>
+            </div>
+        </div>
+
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary" ng-click="create()" >{{createButtonCaption}}</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Annuler</button>
+        </div>
+</div>
+</form>
+</div>

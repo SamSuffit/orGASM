@@ -4,3 +4,8 @@
 *.jar
 *.war
 *.ear
+.idea/
+src/main/webapp/angularApps/node_modules/
+.settings/
+target/
+.settings/

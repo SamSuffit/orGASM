@@ -1,0 +1,43 @@
+<ul>
+    <li ng-repeat="dEvent in items" class="repeat-item">
+        <a href="#/divingEvent/{{dEvent.id}}">{{dEvent.place}}</a>&nbsp;<small class="text-muted">le : {{dEvent.date | date:'dd/MM/yyyy'}}</small>
+        <ul>
+            <li ng-repeat="rent in dEvent.rentalRecords" class="repeat-item">
+                {{rent.renter.firstName}} {{rent.renter.lastName}} ({{rent.price}}€)
+            </li>
+            <li>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="edit(dEvent.id)">Editer</button>
+                <!--<button type="button" class="btn btn-danger" ng-click="remove(regulator.reference)">Effacer</button>-->
+            </li>
+        </ul>
+    </li>
+</ul>
+<div class="create-from">
+    <h3>
+        <form role="form">
+            <div class="form-group">
+                <label for="place">Lieu</label>
+                <input type="text" class="form-control" placeholder="Entrer un lieu" id="place" ng-model="newItem.place">
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input class="form-control" placeholder="Entrer une date" id="date" ng-model="newItem.date" data-date-format="dd/mm/yyyy" data-bs-datepicker />
+            </div>
+            <div class="form-group">
+                <label for="renter">Responsable</label>
+                <select id="renter" class="form-control" placeholder="Sélectionner un responsable"
+                        ng-model="newItem.inCharge.id" ng-options="it.id as it.firstName + ' ' + it.lastName for it in adherents" class="form-control">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="billingType">Type de facturaction</label>
+                <select id="billingType" class="form-control" placeholder="Sélectionner un type de facturation"
+                        ng-model="newItem.billingType.label" ng-options="it.label as it.label for it in billingTypes" class="form-control">
+                </select>
+            </div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary" ng-click="create()" >{{createButtonCaption}}</button>
+                <button type="button" class="btn btn-primary" ng-click="cancel()">Annuler</button>
+            </div>
+        </form>
+</div>
