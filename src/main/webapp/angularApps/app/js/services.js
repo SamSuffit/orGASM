@@ -149,6 +149,10 @@ angular.module('myApp.services', ['ngResource'])
                     }
                 );
             };
+
+            $scope.showRentHistory = function(id){
+                $scope.histoItem =  _factory.get({'itemId': id});
+            };
         };
 
         return adminHelperService;
