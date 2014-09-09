@@ -11,9 +11,9 @@
     <li>Pression de chargement ou pression de service (exprimée en bar): {{item.operatingPressure}}</li>
     <li>Pression de ré-épreuve à 15 ℃ (exprimée en bar): {{item.testPressure}}</li>
     <li>Date de ré-épreuve: {{item.testDate | date:'dd/MM/yyyy'}}</li>
-    <li>Poinçon de l'organisme vérificateur: {{item.punch}}</li>
+    <li>Poinçon de l'organisme vérificateur: {{item.punch ? 'Oui' : 'Non'}}</li>
     <li>Date du dernier TIV: {{item.lastDateOfTIV | date:'dd/MM/yyyy'}}</li>
-    <li>Status locatif:  {{item.status}} </li>
+    <li>Status locatif:  {{item.status ? 'Oui' : 'Non'}} </li>
 </ul>
 
 <div data-ng-include="'partials/histoDisplay.html'" ng-model="historyList" />
