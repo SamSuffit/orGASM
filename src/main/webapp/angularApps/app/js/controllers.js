@@ -255,4 +255,8 @@ angular.module('myApp.controllers', [])
         function($scope, displayHelperService, Suit) {
             displayHelperService.init($scope, Suit, "Détail de la combinaison ");
     }])
+    .controller('tankDisplayCtrl', ['$scope' ,'displayHelperService' , 'Tank',
+        function($scope, displayHelperService, Tank) {
+            displayHelperService.init($scope, Tank, "Détail du bloc  ");
+    }])
 ;

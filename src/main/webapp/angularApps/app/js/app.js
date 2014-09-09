@@ -55,6 +55,7 @@ angular.module('myApp', [
     $routeProvider.when('/regulator', {templateUrl: 'partials/regulatorList.html', controller: 'regulatorListCtrl'});
     $routeProvider.when('/regulator/:id', {templateUrl: 'partials/regulatorDisplay.html', controller: 'regulatorDisplayCtrl'});
     $routeProvider.when('/tank', {templateUrl: 'partials/tankList.html', controller: 'tankListCtrl'});
+    $routeProvider.when('/tank/:id', {templateUrl: 'partials/tankDisplay.html', controller: 'tankDisplayCtrl'});
     $routeProvider.when('/suit', {templateUrl: 'partials/suitList.html', controller: 'suitListCtrl'});
     $routeProvider.when('/suit/:id', {templateUrl: 'partials/suitDisplay.html', controller: 'suitDisplayCtrl'});
     $routeProvider.when('/divingEvent', {templateUrl: 'partials/divingEventList.html', controller: 'divingEventListCtrl'});
