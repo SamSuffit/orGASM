@@ -4,18 +4,18 @@ public enum Screw {
 	/**
 	 * 25 * 200 SI
 	 */
-	Air,
+	SI_25_200,
 	/**
 	 * M25 * 2 ISO (since 1988)
 	 */
-	ISO,
+	M25_2_ISO,
 	/**
 	 * 3/4 DIN 259
 	 */
-	DIN,
+	DIN_3_4_GAZ,
 	/**
 	 * 26/200 (used for Nitrox tank)
 	 */
-	Nitrox
+	NITROX_26_200
     ;
 }
