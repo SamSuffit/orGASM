@@ -1,0 +1,8 @@
+<h4>Caractéristiques</h4>
+<ul>
+    <li>Size: {{item.size}}</li>
+    <li>Brand: {{item.brand}}</li>
+    <li>Status locatif:  {{item.status ? 'Oui' : 'Non'}} </li>
+</ul>
+
+<div data-ng-include="'partials/histoDisplay.html'" ng-model="historyList" />

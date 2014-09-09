@@ -47,14 +47,18 @@ angular.module('myApp', [
 
 ])
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'homeCtrl'});
-  $routeProvider.when('/rentedEquipment', {templateUrl: 'partials/rentedEquipment.html', controller: 'rentedEquipmentCtrl'});
-  $routeProvider.when('/stab', {templateUrl: 'partials/stabList.html', controller: 'stabListCtrl'});
-  $routeProvider.when('/adherent', {templateUrl: 'partials/adherentList.html', controller: 'adherentListCtrl'});
-  $routeProvider.when('/regulator', {templateUrl: 'partials/regulatorList.html', controller: 'regulatorListCtrl'});
-  $routeProvider.when('/tank', {templateUrl: 'partials/tankList.html', controller: 'tankListCtrl'});
-  $routeProvider.when('/suit', {templateUrl: 'partials/suitList.html', controller: 'suitListCtrl'});
-  $routeProvider.when('/divingEvent', {templateUrl: 'partials/divingEventList.html', controller: 'divingEventListCtrl'});
-  $routeProvider.when('/divingEvent/:dEventId', {templateUrl: 'partials/divingEventEdit.html', controller: 'divingEventEditCtrl'});
-  $routeProvider.otherwise({redirectTo: '/home'});
+    $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'homeCtrl'});
+    $routeProvider.when('/rentedEquipment', {templateUrl: 'partials/rentedEquipment.html', controller: 'rentedEquipmentCtrl'});
+    $routeProvider.when('/stab', {templateUrl: 'partials/stabList.html', controller: 'stabListCtrl'});
+    $routeProvider.when('/stab/:id', {templateUrl: 'partials/stabDisplay.html', controller: 'stabDisplayCtrl'});
+    $routeProvider.when('/adherent', {templateUrl: 'partials/adherentList.html', controller: 'adherentListCtrl'});
+    $routeProvider.when('/regulator', {templateUrl: 'partials/regulatorList.html', controller: 'regulatorListCtrl'});
+    $routeProvider.when('/regulator/:id', {templateUrl: 'partials/regulatorDisplay.html', controller: 'regulatorDisplayCtrl'});
+    $routeProvider.when('/tank', {templateUrl: 'partials/tankList.html', controller: 'tankListCtrl'});
+    $routeProvider.when('/tank/:id', {templateUrl: 'partials/tankDisplay.html', controller: 'tankDisplayCtrl'});
+    $routeProvider.when('/suit', {templateUrl: 'partials/suitList.html', controller: 'suitListCtrl'});
+    $routeProvider.when('/suit/:id', {templateUrl: 'partials/suitDisplay.html', controller: 'suitDisplayCtrl'});
+    $routeProvider.when('/divingEvent', {templateUrl: 'partials/divingEventList.html', controller: 'divingEventListCtrl'});
+    $routeProvider.when('/divingEvent/:dEventId', {templateUrl: 'partials/divingEventEdit.html', controller: 'divingEventEditCtrl'});
+    $routeProvider.otherwise({redirectTo: '/home'});
 }]);

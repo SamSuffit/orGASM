@@ -240,4 +240,23 @@ angular.module('myApp.controllers', [])
             $scope.reload();
 
         }])
+    /*
+     * Debut des ctrl pour le détail des équipements
+     */
+    .controller('stabDisplayCtrl', ['$scope' ,'displayHelperService' , 'Jacket',
+        function($scope, displayHelperService, Jacket) {
+            displayHelperService.init($scope, Jacket, "Détail de la stab ");
+    }])
+    .controller('regulatorDisplayCtrl', ['$scope' ,'displayHelperService' , 'Regulator',
+        function($scope, displayHelperService, Regulator) {
+            displayHelperService.init($scope, Regulator, "Détail du détendeur ");
+    }])
+    .controller('suitDisplayCtrl', ['$scope' ,'displayHelperService' , 'Suit',
+        function($scope, displayHelperService, Suit) {
+            displayHelperService.init($scope, Suit, "Détail de la combinaison ");
+    }])
+    .controller('tankDisplayCtrl', ['$scope' ,'displayHelperService' , 'Tank',
+        function($scope, displayHelperService, Tank) {
+            displayHelperService.init($scope, Tank, "Détail du bloc  ");
+    }])
 ;
