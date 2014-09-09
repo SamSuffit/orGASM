@@ -50,6 +50,7 @@ angular.module('myApp', [
   $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'homeCtrl'});
   $routeProvider.when('/rentedEquipment', {templateUrl: 'partials/rentedEquipment.html', controller: 'rentedEquipmentCtrl'});
   $routeProvider.when('/stab', {templateUrl: 'partials/stabList.html', controller: 'stabListCtrl'});
+  $routeProvider.when('/stab/:id', {templateUrl: 'partials/stabDisplay.html', controller: 'stabDisplayCtrl'});
   $routeProvider.when('/adherent', {templateUrl: 'partials/adherentList.html', controller: 'adherentListCtrl'});
   $routeProvider.when('/regulator', {templateUrl: 'partials/regulatorList.html', controller: 'regulatorListCtrl'});
   $routeProvider.when('/tank', {templateUrl: 'partials/tankList.html', controller: 'tankListCtrl'});

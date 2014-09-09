@@ -240,4 +240,13 @@ angular.module('myApp.controllers', [])
             $scope.reload();
 
         }])
+    .controller('stabDisplayCtrl', ['$scope' ,'$routeParams' , 'Jacket',
+        function($scope, $routeParams, Jacket) {
+
+            $scope.stab = Jacket.get({'itemId': $routeParams.id}, function () {
+                $scope.historyList =  $scope.stab.historyList;
+                $scope.$parent.title ="Détail de la stab " +   $scope.stab.reference;
+                $scope.$parent.titleSmall = ''
+            });
+        }])
 ;
