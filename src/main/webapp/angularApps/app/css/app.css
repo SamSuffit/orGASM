@@ -56,3 +56,12 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+.title {
+    display: inline;
+}
+.titleSmall {
+    display: inline;
+    color: #bbb;
+    margin-left: 5px;
+}
