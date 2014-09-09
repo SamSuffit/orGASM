@@ -1,0 +1,19 @@
+<h4>Caractéristiques</h4>
+<ul>
+    <li>Brand: {{item.brand}}</li>
+    <li>Numéro de série: {{item.serialNumber}}</li>
+    <li>Capacité (Volume intérieur : dit volume en eau): {{item.capacity}}</li>
+    <li>Désignation du gaz contenu: {{item.gaz}}</li>
+    <li>Matière du bloc: {{item.material}}</li>
+    <li>Type de pas de vis: {{item.screw}}</li>
+    <li>Poids à vide (en kg): {{item.weight}}</li>
+    <li>Date de fabrication: {{item.buildDate| date:'dd/MM/yyyy'}}</li>
+    <li>Pression de chargement ou pression de service (exprimée en bar): {{item.operatingPressure}}</li>
+    <li>Pression de ré-épreuve à 15 ℃ (exprimée en bar): {{item.testPressure}}</li>
+    <li>Date de ré-épreuve: {{item.testDate | date:'dd/MM/yyyy'}}</li>
+    <li>Poinçon de l'organisme vérificateur: {{item.punch ? 'Oui' : 'Non'}}</li>
+    <li>Date du dernier TIV: {{item.lastDateOfTIV | date:'dd/MM/yyyy'}}</li>
+    <li>Status locatif:  {{item.status ? 'Oui' : 'Non'}} </li>
+</ul>
+
+<div data-ng-include="'partials/histoDisplay.html'" ng-model="historyList" />
