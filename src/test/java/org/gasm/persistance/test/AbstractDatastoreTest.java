@@ -3,13 +3,12 @@ package org.gasm.persistance.test;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.google.devrel.samples.listener.InitContextListener;
-import org.gasm.matos.dao.AdherentDao;
-import org.gasm.matos.dao.DivingEventDao;
-import org.gasm.matos.dao.JacketDao;
-import org.gasm.matos.dao.RentHistoryDao;
+import org.gasm.matos.dao.*;
 import org.gasm.matos.entity.Adherent;
 import org.gasm.matos.entity.Jacket;
+import org.gasm.matos.entity.Tank;
 import org.gasm.matos.entity.enums.Brand;
+import org.gasm.matos.entity.enums.Capacity;
 import org.gasm.matos.entity.enums.Size;
 import org.gasm.matos.entity.rental.DivingEvent;
 import org.gasm.matos.entity.rental.RentalRecord;
@@ -37,6 +36,9 @@ public abstract class AbstractDatastoreTest {
 
     protected AdherentDao adherentDao;
     protected JacketDao jacketDao;
+    protected TankDao tankDao;
+
+
     protected DivingEventDao divingEventDao;
     protected RentHistoryDao rentHistoryDao;
 
@@ -54,6 +56,8 @@ public abstract class AbstractDatastoreTest {
 
         adherentDao = new AdherentDao();
         jacketDao = new JacketDao();
+        tankDao = new TankDao();
+
         divingEventDao = new DivingEventDao();
         rentalRecordAPI = new RentalRecordAPI();
         rentHistoryDao = new RentHistoryDao();
@@ -83,6 +87,15 @@ public abstract class AbstractDatastoreTest {
         jacket.setBrand(brand);
         jacketDao.createOrUpdate(jacket);
         return jacket;
+    }
+
+    protected Tank createTank(String reference, Capacity capacity, Brand brand) {
+        Tank tank = new Tank();
+        tank.setReference(reference);
+        tank.setCapacity(capacity);
+        tank.setBrand(brand);
+        tankDao.createOrUpdate(tank);
+        return tank;
     }
 
     protected DivingEvent createDivingEvent(Adherent inCharge) {

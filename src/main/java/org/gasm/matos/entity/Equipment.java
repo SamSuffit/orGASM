@@ -6,6 +6,8 @@ import com.googlecode.objectify.annotation.Id;
 import org.apache.commons.lang3.ObjectUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.gasm.matos.dao.RentHistoryDao;
 import org.gasm.matos.entity.enums.Brand;
 import org.gasm.matos.entity.exception.IllegalRentStatusException;
@@ -38,6 +40,7 @@ public abstract class Equipment extends AbstractStringEntity {
     @JsonIgnore
     private Ref<RentalRecord> rentalRecord;
 
+    @JsonIgnore
     private List<Ref<RentHistory>> historyList;
 
     private final RentHistoryDao rentHistoryDao = new RentHistoryDao();
@@ -124,6 +127,7 @@ public abstract class Equipment extends AbstractStringEntity {
 
     }
 
+    @JsonProperty("isRented")
     public boolean isRented() {
         return  rentalRecord!=null;
     }
@@ -141,8 +145,9 @@ public abstract class Equipment extends AbstractStringEntity {
 
     public abstract double getPrice();
 
-    public List<RentHistory> getHistoryList() {
-        return ObjectifyHelper.toList(historyList);
+    @JsonProperty("historyList")
+    public ArrayList<RentHistory> getHistoryList() {
+        return new ArrayList<>(ObjectifyHelper.toList(historyList));
     }
 
     public boolean isStatus() {
@@ -151,5 +156,14 @@ public abstract class Equipment extends AbstractStringEntity {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    /**
+     * Update all REST ignore properties from the old bean
+     * @param oldBean the old bean
+     */
+    public void updateJSONIgnoreProperties(Equipment oldBean) {
+        this.rentalRecord = oldBean.rentalRecord;
+        this.historyList = oldBean.historyList;
     }
 }
