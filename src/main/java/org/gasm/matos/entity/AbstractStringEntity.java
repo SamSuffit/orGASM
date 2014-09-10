@@ -1,6 +1,7 @@
 package org.gasm.matos.entity;
 
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +14,7 @@ public abstract class AbstractStringEntity extends AbstractEntity{
 
     public abstract String getReference();
 
+    @JsonProperty("isCreated")
     public final boolean isCreated() {
         return StringUtils.isNotBlank(getReference());
     }

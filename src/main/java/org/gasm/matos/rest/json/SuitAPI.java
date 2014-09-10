@@ -7,7 +7,7 @@ import org.gasm.persistance.dao.AbstractStringIdDao;
 import javax.ws.rs.Path;
 
 @Path("/suit")
-public class SuitAPI extends AbstractStringIdAPI<Suit> {
+public class SuitAPI extends AbstractEquipmentAPI<Suit> {
 	
 	WetsuitDao dao = new WetsuitDao();
 

@@ -7,7 +7,7 @@ import org.gasm.persistance.dao.AbstractStringIdDao;
 import javax.ws.rs.Path;
 
 @Path("/tank")
-public class TankAPI extends AbstractStringIdAPI<Tank> {
+public class TankAPI extends AbstractEquipmentAPI<Tank> {
 	
 	TankDao dao = new TankDao();
 

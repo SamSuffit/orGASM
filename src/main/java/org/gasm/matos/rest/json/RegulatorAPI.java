@@ -7,7 +7,7 @@ import org.gasm.persistance.dao.AbstractStringIdDao;
 import javax.ws.rs.Path;
 
 @Path("/regulator")
-public class RegulatorAPI extends AbstractStringIdAPI<Regulator> {
+public class RegulatorAPI extends AbstractEquipmentAPI<Regulator> {
 	
 	RegulatorDao dao = new RegulatorDao();
 
