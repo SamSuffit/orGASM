@@ -3,6 +3,9 @@ package org.gasm.matos.entity;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.sun.jersey.json.impl.JSONMarshallerImpl;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.gasm.matos.dao.RentHistoryDao;
 import org.gasm.matos.entity.helper.ObjectifyHelper;
 import org.gasm.matos.entity.rental.billing.BillingType;
@@ -29,6 +32,7 @@ public class RentHistory extends AbstractLongEntity {
 
     private Ref<Adherent> renter;
 
+    @JsonIgnore
     private BillingType billingType;
 
     public RentHistory(Date rentDate, Adherent renter, BillingType billingType) {
@@ -49,6 +53,11 @@ public class RentHistory extends AbstractLongEntity {
         return ObjectifyHelper.getItem(renter);
     }
 
+    public void setRenter(Adherent renter) {
+        this.renter = ObjectifyHelper.getRef(renter);
+    }
+
+    @JsonProperty("billingType")
     public BillingType getBillingType() {
         return billingType;
     }

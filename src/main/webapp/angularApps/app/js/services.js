@@ -150,8 +150,23 @@ angular.module('myApp.services', ['ngResource'])
                     }
                 );
             };
+
+            $scope.showRentHistory = function(id){
+                $scope.histoItem =  _factory.get({'itemId': id});
+            };
         };
 
         return adminHelperService;
+    }])
+    .factory('displayHelperService', ['$routeParams',function($routeParams){
+        var displayHelperService = new Object();
+        displayHelperService.init = function($scope,_factory, titlePrefix) {
+            $scope.item = _factory.get({'itemId': $routeParams.id}, function () {
+                $scope.historyList =  $scope.item.historyList;
+                $scope.$parent.title = titlePrefix + $scope.item.reference;
+                $scope.$parent.titleSmall = ''
+            });
+        };
+        return displayHelperService;
     }])
 ;

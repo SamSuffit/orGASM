@@ -7,7 +7,7 @@ import org.gasm.persistance.dao.AbstractStringIdDao;
 import javax.ws.rs.Path;
 
 @Path("/jacket")
-public class JacketAPI extends AbstractStringIdAPI<Jacket> {
+public class JacketAPI extends AbstractEquipmentAPI<Jacket> {
 	
 	JacketDao dao = new JacketDao();
 
