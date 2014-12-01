@@ -73,12 +73,20 @@ public abstract class AbstractDatastoreTest {
     }
 
     protected Adherent createAdherent(String firstName, String lastName) {
+        return createAdherent(firstName, lastName,null,null);
+    }
+
+
+    protected Adherent createAdherent(String firstName, String lastName, String login, String password) {
         Adherent adherent = new Adherent();
         adherent.setFirstName(firstName);
         adherent.setLastName(lastName);
+        adherent.setLogin(login);
+        adherent.setPassword(password);
         adherentDao.createOrUpdate(adherent);
         return adherent;
     }
+
 
     protected Jacket createJacket(String reference, Size size, Brand brand) {
         Jacket jacket = new Jacket();

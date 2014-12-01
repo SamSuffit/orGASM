@@ -1,6 +1,5 @@
 package org.gasm.matos.rest.json.enums;
 
-import org.gasm.matos.entity.enums.Gaz;
 import org.gasm.matos.entity.enums.Material;
 
 import javax.ws.rs.GET;
