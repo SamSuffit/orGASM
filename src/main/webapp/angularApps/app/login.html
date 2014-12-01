@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My AngularJS App</title>
+    <link rel="stylesheet" href="css/app.css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+    <!-- date picker -->
+    <link rel="stylesheet" href="lib/angular-strap/bootstrap-datepicker.css">
+
+
+</head>
+<body>
+
+<body>
+<div class="jumbotron">
+    <div class="container">
+
+        <h1> Logging</h1>
+
+        <div class="create-from">
+            <form role="form">
+                <div class="form-group">
+                    <label for="login">Login</label>
+                    <input class="form-control" type="text" name="login" id="login">
+                   </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" name="password" id="password">
+                </div>
+                <input type="submit" id="connectBtn" class="btn btn-primary" value="Connect">
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('#connectBtn').on('click', function() {
+        var urlPrefix =  window.location.href.indexOf('localhost:8000') != -1 ? 'http://localhost:8080' : '';
+        $.ajax(urlPrefix + '/api/securityManager/getSecurityKey?login=' +$('#login').val() + '&password=' +$('#password').val())
+                .success(function(data) {
+                    if(data !== undefined && data !== '') {
+                        localStorage.securityKey = data;
+                        var url = window.location.href.substring(0,  window.location.href.lastIndexOf('/'));
+                        window.location.href = url + '/index.html';
+                    }
+           });
+        return false;
+    });
+    });
+</script>
+
+</html>

@@ -14,95 +14,96 @@ var enumsTransformResponse = function(data, headersGetter) {
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', ['ngResource'])
-    .value('version', '0.1')
-    .factory('Jacket', ['$resource',
-        function($resource){
-            return $resource('/api/jacket/:itemId', {itemId:'@id'});
+    .value('urlPrefix' , window.location.href.indexOf('localhost:8000') != -1 ? 'http://localhost:8080' : '')
+    .factory('Jacket', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix) {
+            console.log(urlPrefix);
+            return $resource( urlPrefix  + '/api/jacket/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'});
         }])
-    .factory('Regulator', ['$resource',
-        function($resource){
-            return $resource('/api/regulator/:itemId', {itemId:'@id'});
+    .factory('Regulator', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix) {
+            return $resource(urlPrefix + '/api/regulator/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'});
         }])
-    .factory('Suit', ['$resource',
-        function($resource){
-            return $resource('/api/suit/:itemId', {itemId:'@id'});
+    .factory('Suit', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/suit/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'});
         }])
-    .factory('Tank', ['$resource',
-        function($resource){
-            return $resource('/api/tank/:itemId', {itemId:'@id'});
+    .factory('Tank', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/tank/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'});
         }])
-    .factory('Equipment', ['$resource',
-        function($resource){
-            return $resource('/api/equipment/:itemId/',{itemId:'@reference'} , {
+    .factory('Equipment', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/equipment/:itemId/',{itemId:'@reference'} , {
                 turnIn : {method: 'PUT', url: '/api/equipment/:itemId/turnIn/' },
-                findAllRented: { method: 'GET', isArray:true, url: '/api/equipment/findAllRented/' }
+                findAllRented: { method: 'GET', isArray:true, url: urlPrefix + '/api/equipment/findAllRented?securityKey=' + localStorage.securityKey }
             });
         }])
     // ------------------ Enums starts -----------------------
-    .factory('Capacity', ['$resource',
-        function($resource){
-            return $resource('/api/capacity/:itemId', {itemId:'@id'}, {
+    .factory('Capacity', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/capacity/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'}, {
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
-    .factory('Size', ['$resource',
-        function($resource){
-            return $resource('/api/size/:itemId', {itemId:'@id'}, {
+    .factory('Size', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/size/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'}, {
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
-    .factory('Brand', ['$resource',
-        function($resource){
-            return $resource('/api/brand/:itemId', {itemId:'@id'}, {
+    .factory('Brand', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/brand/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'}, {
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
-    .factory('BillingType', ['$resource',
-        function($resource){
-            return $resource('/api/billing/billingType/:itemId');
+    .factory('BillingType', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/billing/billingType/:itemId?securityKey=' + localStorage.securityKey);
         }])
-    .factory('Payment', ['$resource',
-        function($resource){
-            return $resource('/api/payment/:itemId', {} , {
+    .factory('Payment', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/payment/:itemId?securityKey=' + localStorage.securityKey, {} , {
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
-    .factory('SuitPart', ['$resource',
-        function($resource){
-            return $resource('/api/suitPart/:itemId', {} , {
+    .factory('SuitPart', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/suitPart/:itemId?securityKey=' + localStorage.securityKey, {} , {
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
-    .factory('Gaz', ['$resource',
-        function($resource){
-            return $resource('/api/gaz/:itemId', {itemId:'@id'}, {
+    .factory('Gaz', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/gaz/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'}, {
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
-    .factory('Material', ['$resource',
-        function($resource){
-            return $resource('/api/material/:itemId', {itemId:'@id'}, {
+    .factory('Material', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/material/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'}, {
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
-    .factory('Screw', ['$resource',
-        function($resource){
-            return $resource('/api/screw/:itemId', {itemId:'@id'}, {
+    .factory('Screw', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/screw/:itemId?securityKey=' + localStorage.securityKey, {itemId:'@id'}, {
                 query: {method:'GET', isArray:true, transformResponse : enumsTransformResponse}
             });
         }])
     // -----------------Enums ends-----------------------------------
-    .factory('Adherent', ['$resource',
-        function($resource){
-            return $resource('/api/adherent/:itemId');
+    .factory('Adherent', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/adherent/:itemId?securityKey=' + localStorage.securityKey);
         }])
-    .factory('DivingEvent', ['$resource',
-        function($resource){
-            return $resource('/api/divingEvent/:itemId/');
+    .factory('DivingEvent', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/divingEvent/:itemId/');
         }])
-    .factory('RentalRecord', ['$resource',
-        function($resource){
-            return $resource('/api/rentalRecord/:itemId/',{itemId:'@id'} , {
+    .factory('RentalRecord', ['$resource', 'urlPrefix' ,
+        function($resource , urlPrefix){
+            return $resource(urlPrefix + '/api/rentalRecord/:itemId/',{itemId:'@id'} , {
                 addToDivingEvent: { method: 'PUT', url: '/api/rentalRecord/addToDivingEvent?dEventId=:dEventId&renterId=:renterId&equipmentId=:equipmentId' }
             });
         }])

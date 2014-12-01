@@ -22,11 +22,10 @@ public class Adherent extends AbstractLongEntity {
         return new AdherentDao();
     }
 
-    public Adherent() {};
+    public Adherent() {}
     public Adherent(Long id) {
         this.id = id;
-    };
-
+    }
 
 	@Id
 	private Long id;
@@ -34,6 +33,22 @@ public class Adherent extends AbstractLongEntity {
     private String firstName;
 	
 	private String lastName;
+
+    private String login;
+
+    private String password;
+
+    @JsonIgnore
+    public String getFullName() {
+        StringBuilder sb = new StringBuilder();
+        if(StringUtils.isNotBlank(getFirstName())) {
+            sb.append(getFirstName()).append(" ");
+        }
+        if(StringUtils.isNotBlank(getLastName())) {
+            sb.append(getLastName());
+        }
+        return sb.toString();
+    }
 	
 	public Long getId() {
 		return id;
@@ -59,16 +74,19 @@ public class Adherent extends AbstractLongEntity {
 		this.lastName = lastName;
 	}
 
-    @JsonIgnore
-    public String getFullName() {
-        StringBuilder sb = new StringBuilder();
-        if(StringUtils.isNotBlank(getFirstName())) {
-            sb.append(getFirstName()).append(" ");
-        }
-        if(StringUtils.isNotBlank(getLastName())) {
-            sb.append(getLastName());
-        }
-      return sb.toString();
+    public String getLogin() {
+        return login;
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -1,15 +1,5 @@
 package org.gasm.matos.rest.json.enums;
 
-import org.gasm.matos.entity.enums.Material;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import java.util.Arrays;
-import java.util.List;
-import org.gasm.matos.entity.enums.Gaz;
-import org.gasm.matos.entity.enums.Material;
 import org.gasm.matos.entity.enums.Screw;
 
 import javax.ws.rs.GET;
